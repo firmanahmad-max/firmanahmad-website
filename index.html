@@ -162,6 +162,21 @@
     0%, 100% { opacity: 1; transform: scale(1); }
     50% { opacity: 0.4; transform: scale(0.7); }
   }
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  /* Video card hover effect for play button */
+  .video-card:hover .video-thumb-wrap > div:last-child {
+    transform: scale(1.15);
+  }
+  .video-card:hover .video-thumb-wrap img {
+    transform: scale(1.05);
+    transition: transform 0.4s ease;
+  }
+  .video-thumb-wrap img {
+    transition: transform 0.4s ease;
+  }
   .hero-name {
     font-family: 'Playfair Display', serif;
     font-size: clamp(3.5rem, 7vw, 6rem);
@@ -1182,44 +1197,44 @@
       Kunjungi Channel
     </a>
   </div>
-  <div class="videos-grid">
-    <!-- YouTube Playlist Embed - Automatic Latest Videos -->
-    <div class="video-card reveal" style="padding: 0; overflow: hidden;">
-      <iframe 
-        style="width: 100%; height: 300px; border: none; border-radius: 12px; display: block;"
-        src="https://www.youtube.com/embed/videoseries?list=UUmv4f1ZX5uHrGp6z6wBjlrg" 
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-        allowfullscreen>
-      </iframe>
-      <div class="video-info">
-        <div class="video-title">Video Terbaru dari Channel boysnocry</div>
-        <div class="video-date">Playlist otomatis update ↗</div>
-      </div>
-    </div>
-
-    <!-- Featured/Popular Videos -->
-    <a href="https://www.youtube.com/@boysnocry/featured" target="_blank" class="video-card reveal reveal-delay-1" style="text-decoration: none; color: inherit;">
-      <div class="video-thumb-wrap" style="background: url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 320 180%22><defs><linearGradient id=%22grad%22 x1=%220%25%22 y1=%220%25%22 x2=%22100%25%22 y2=%22100%25%22><stop offset=%220%25%22 style=%22stop-color:%23FF6B35;stop-opacity:1%22 /><stop offset=%22100%25%22 style=%22stop-color:%23D84315;stop-opacity:1%22 /></linearGradient></defs><rect width=%22320%22 height=%22180%22 fill=%22url(%23grad)%22/><circle cx=%22160%22 cy=%2290%22 r=%2245%22 fill=%22rgba(255,255,255,0.3)%22/><polygon points=%22150,70 150,110 180,90%22 fill=%22white%22/><text x=%22160%22 y=%22140%22 font-size=%2220%22 fill=%22white%22 text-anchor=%22middle%22 font-weight=%22bold%22>PILIHAN EDITOR</text></svg>') center/cover; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center;">
-        <div style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.6) 100%);"></div>
-      </div>
-      <div class="video-info">
-        <div class="video-title">Video Pilihan & Unggulan</div>
-        <div class="video-date">Lihat video featured ↗</div>
-      </div>
-    </a>
-
-    <!-- Live Streams -->
-    <a href="https://www.youtube.com/@boysnocry/streams" target="_blank" class="video-card reveal reveal-delay-2" style="text-decoration: none; color: inherit;">
-      <div class="video-thumb-wrap" style="background: linear-gradient(135deg, #DD0000 0%, #AA0000 100%); display: flex; align-items: center; justify-content: center; color: white; font-size: 3rem; position: relative; overflow: hidden;">
-        <div style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.6) 100%);"></div>
-        <div style="text-align: center; z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 1rem;">
-          <div style="font-size: 3rem; animation: pulse 1.5s ease-in-out infinite;">🔴</div>
-          <div style="font-size: 1.2rem; font-weight: bold; text-transform: uppercase; letter-spacing: 1px;">Live Stream</div>
+  <div class="videos-grid" id="videosGrid">
+    <!-- Dynamic Video Cards - Loaded via JavaScript -->
+    <a href="https://www.youtube.com/@boysnocry/videos" target="_blank" class="video-card reveal" id="videoCard1" style="text-decoration: none; color: inherit;">
+      <div class="video-thumb-wrap" id="videoThumb1" style="background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%); display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden;">
+        <div class="video-loading-spinner" style="display: flex; flex-direction: column; align-items: center; gap: 1rem; color: var(--text-secondary);">
+          <div style="width: 40px; height: 40px; border: 3px solid rgba(255,255,255,0.1); border-top-color: var(--terracotta); border-radius: 50%; animation: spin 1s linear infinite;"></div>
+          <div style="font-size: 0.85rem;">Memuat video...</div>
         </div>
       </div>
       <div class="video-info">
-        <div class="video-title">Live Streaming & Recording</div>
-        <div class="video-date">Lihat live stream ↗</div>
+        <div class="video-title" id="videoTitle1">Video Terbaru dari Channel boysnocry</div>
+        <div class="video-date" id="videoDate1">Memuat... ↗</div>
+      </div>
+    </a>
+
+    <a href="https://www.youtube.com/@boysnocry/videos" target="_blank" class="video-card reveal reveal-delay-1" id="videoCard2" style="text-decoration: none; color: inherit;">
+      <div class="video-thumb-wrap" id="videoThumb2" style="background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%); display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden;">
+        <div class="video-loading-spinner" style="display: flex; flex-direction: column; align-items: center; gap: 1rem; color: var(--text-secondary);">
+          <div style="width: 40px; height: 40px; border: 3px solid rgba(255,255,255,0.1); border-top-color: var(--amber); border-radius: 50%; animation: spin 1s linear infinite;"></div>
+          <div style="font-size: 0.85rem;">Memuat video...</div>
+        </div>
+      </div>
+      <div class="video-info">
+        <div class="video-title" id="videoTitle2">Video dari Channel boysnocry</div>
+        <div class="video-date" id="videoDate2">Memuat... ↗</div>
+      </div>
+    </a>
+
+    <a href="https://www.youtube.com/@boysnocry/videos" target="_blank" class="video-card reveal reveal-delay-2" id="videoCard3" style="text-decoration: none; color: inherit;">
+      <div class="video-thumb-wrap" id="videoThumb3" style="background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%); display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden;">
+        <div class="video-loading-spinner" style="display: flex; flex-direction: column; align-items: center; gap: 1rem; color: var(--text-secondary);">
+          <div style="width: 40px; height: 40px; border: 3px solid rgba(255,255,255,0.1); border-top-color: var(--gold); border-radius: 50%; animation: spin 1s linear infinite;"></div>
+          <div style="font-size: 0.85rem;">Memuat video...</div>
+        </div>
+      </div>
+      <div class="video-info">
+        <div class="video-title" id="videoTitle3">Video dari Channel boysnocry</div>
+        <div class="video-date" id="videoDate3">Memuat... ↗</div>
       </div>
     </a>
   </div>
@@ -1475,6 +1490,183 @@ window.addEventListener('scroll', () => {
   const nav = document.getElementById('navbar');
   nav.style.boxShadow = window.scrollY > 50 ? '0 2px 20px rgba(44,26,14,0.1)' : 'none';
 });
+
+// ─── Load Latest YouTube Videos from @boysnocry ───
+(async function loadYouTubeVideos() {
+  const CHANNEL_ID = 'UCvXBb55-NxB9N1mUjOafjRg'; // @boysnocry channel ID
+  const RSS_URL = `https://www.youtube.com/feeds/videos.xml?channel_id=${CHANNEL_ID}`;
+  
+  // List of CORS proxies to try in order
+  const proxies = [
+    `https://api.allorigins.win/raw?url=${encodeURIComponent(RSS_URL)}`,
+    `https://corsproxy.io/?${encodeURIComponent(RSS_URL)}`,
+    `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(RSS_URL)}`
+  ];
+  
+  let xmlText = null;
+  
+  // Try each proxy until one works
+  for (const proxyUrl of proxies) {
+    try {
+      const response = await fetch(proxyUrl, { 
+        method: 'GET',
+        headers: { 'Accept': 'application/xml, text/xml, */*' }
+      });
+      if (response.ok) {
+        xmlText = await response.text();
+        if (xmlText && xmlText.includes('<entry')) {
+          break;
+        }
+      }
+    } catch (err) {
+      console.log(`Proxy failed: ${proxyUrl}`, err.message);
+      continue;
+    }
+  }
+  
+  if (!xmlText) {
+    console.warn('Could not fetch YouTube videos, showing fallback');
+    showFallbackVideos();
+    return;
+  }
+  
+  try {
+    const parser = new DOMParser();
+    const xml = parser.parseFromString(xmlText, 'application/xml');
+    const entries = xml.querySelectorAll('entry');
+    
+    if (entries.length === 0) {
+      showFallbackVideos();
+      return;
+    }
+    
+    const videos = [];
+    for (let i = 0; i < Math.min(3, entries.length); i++) {
+      const entry = entries[i];
+      // YouTube RSS uses namespaces, handle both cases
+      const videoIdEl = entry.querySelector('videoId') || 
+                        entry.getElementsByTagNameNS('http://www.youtube.com/xml/schemas/2015', 'videoId')[0];
+      const titleEl = entry.querySelector('title');
+      const publishedEl = entry.querySelector('published');
+      
+      const videoId = videoIdEl?.textContent;
+      const title = titleEl?.textContent || 'Video boysnocry';
+      const published = publishedEl?.textContent;
+      
+      if (videoId) {
+        videos.push({ videoId, title, published });
+      }
+    }
+    
+    if (videos.length === 0) {
+      showFallbackVideos();
+      return;
+    }
+    
+    displayVideos(videos);
+  } catch (err) {
+    console.error('Error parsing RSS:', err);
+    showFallbackVideos();
+  }
+})();
+
+function displayVideos(videos) {
+  videos.forEach((video, index) => {
+    const cardNum = index + 1;
+    const card = document.getElementById(`videoCard${cardNum}`);
+    const thumb = document.getElementById(`videoThumb${cardNum}`);
+    const titleEl = document.getElementById(`videoTitle${cardNum}`);
+    const dateEl = document.getElementById(`videoDate${cardNum}`);
+    
+    if (!card || !thumb) return;
+    
+    // Update link to video
+    card.href = `https://www.youtube.com/watch?v=${video.videoId}`;
+    
+    // Get YouTube thumbnail (try maxresdefault, fallback to hqdefault)
+    const maxResThumb = `https://i.ytimg.com/vi/${video.videoId}/maxresdefault.jpg`;
+    const hqThumb = `https://i.ytimg.com/vi/${video.videoId}/hqdefault.jpg`;
+    
+    // Replace thumb content with image + play overlay
+    thumb.innerHTML = `
+      <img src="${maxResThumb}" 
+           alt="${video.title}" 
+           onerror="this.src='${hqThumb}'; this.onerror=null;"
+           style="width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0;">
+      <div style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.6) 100%); z-index: 1;"></div>
+      <div style="position: relative; z-index: 2; display: flex; align-items: center; justify-content: center; width: 64px; height: 64px; background: rgba(255,0,0,0.9); border-radius: 50%; box-shadow: 0 4px 20px rgba(0,0,0,0.5); transition: transform 0.3s ease;">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="white" style="margin-left: 4px;"><path d="M8 5v14l11-7z"/></svg>
+      </div>
+    `;
+    
+    // Update title
+    if (titleEl) {
+      titleEl.textContent = video.title;
+    }
+    
+    // Update date
+    if (dateEl && video.published) {
+      const date = new Date(video.published);
+      const options = { year: 'numeric', month: 'short', day: 'numeric' };
+      const formatted = date.toLocaleDateString('id-ID', options);
+      dateEl.textContent = `${formatted} · Tonton di YouTube ↗`;
+    } else if (dateEl) {
+      dateEl.textContent = 'Tonton di YouTube ↗';
+    }
+  });
+}
+
+function showFallbackVideos() {
+  // If fetching fails, show nice fallback cards with channel links
+  const fallbacks = [
+    {
+      gradient: 'linear-gradient(135deg, #FF0000 0%, #CC0000 100%)',
+      icon: '🎬',
+      label: 'VIDEO TERBARU',
+      title: 'Video Terbaru dari Channel',
+      cta: 'Lihat di YouTube ↗',
+      href: 'https://www.youtube.com/@boysnocry/videos'
+    },
+    {
+      gradient: 'linear-gradient(135deg, #FF6B35 0%, #D84315 100%)',
+      icon: '⭐',
+      label: 'PILIHAN EDITOR',
+      title: 'Video Pilihan & Unggulan',
+      cta: 'Lihat di YouTube ↗',
+      href: 'https://www.youtube.com/@boysnocry/featured'
+    },
+    {
+      gradient: 'linear-gradient(135deg, #DD0000 0%, #AA0000 100%)',
+      icon: '🔴',
+      label: 'LIVE STREAM',
+      title: 'Live Streaming & Recording',
+      cta: 'Lihat di YouTube ↗',
+      href: 'https://www.youtube.com/@boysnocry/streams'
+    }
+  ];
+  
+  fallbacks.forEach((fb, index) => {
+    const cardNum = index + 1;
+    const card = document.getElementById(`videoCard${cardNum}`);
+    const thumb = document.getElementById(`videoThumb${cardNum}`);
+    const titleEl = document.getElementById(`videoTitle${cardNum}`);
+    const dateEl = document.getElementById(`videoDate${cardNum}`);
+    
+    if (!card || !thumb) return;
+    
+    card.href = fb.href;
+    thumb.style.background = fb.gradient;
+    thumb.innerHTML = `
+      <div style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.5) 100%);"></div>
+      <div style="text-align: center; z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 0.75rem; color: white;">
+        <div style="font-size: 3rem;">${fb.icon}</div>
+        <div style="font-size: 1rem; font-weight: bold; text-transform: uppercase; letter-spacing: 1px;">${fb.label}</div>
+      </div>
+    `;
+    if (titleEl) titleEl.textContent = fb.title;
+    if (dateEl) dateEl.textContent = fb.cta;
+  });
+}
 </script>
 </body>
 </html>
