@@ -1183,34 +1183,43 @@
     </a>
   </div>
   <div class="videos-grid">
-    <!-- YouTube Channel Video Cards -->
-    <a href="https://www.youtube.com/@boysnocry/videos" target="_blank" class="video-card reveal" style="text-decoration: none; color: inherit;">
-      <div class="video-thumb-wrap" style="background: linear-gradient(135deg, #FF0000 0%, #CC0000 100%); display: flex; align-items: center; justify-content: center; color: white; font-size: 3rem;">
-        🎬
-      </div>
+    <!-- YouTube Playlist Embed - Automatic Latest Videos -->
+    <div class="video-card reveal" style="padding: 0; overflow: hidden;">
+      <iframe 
+        style="width: 100%; height: 300px; border: none; border-radius: 12px; display: block;"
+        src="https://www.youtube.com/embed/videoseries?list=UUmv4f1ZX5uHrGp6z6wBjlrg" 
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+        allowfullscreen>
+      </iframe>
       <div class="video-info">
-        <div class="video-title">Video Terbaru dari Channel</div>
-        <div class="video-date">Lihat di YouTube ↗</div>
+        <div class="video-title">Video Terbaru dari Channel boysnocry</div>
+        <div class="video-date">Playlist otomatis update ↗</div>
       </div>
-    </a>
+    </div>
 
+    <!-- Featured/Popular Videos -->
     <a href="https://www.youtube.com/@boysnocry/featured" target="_blank" class="video-card reveal reveal-delay-1" style="text-decoration: none; color: inherit;">
-      <div class="video-thumb-wrap" style="background: linear-gradient(135deg, #FF4444 0%, #CC1111 100%); display: flex; align-items: center; justify-content: center; color: white; font-size: 3rem;">
-        ⭐
+      <div class="video-thumb-wrap" style="background: url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 320 180%22><defs><linearGradient id=%22grad%22 x1=%220%25%22 y1=%220%25%22 x2=%22100%25%22 y2=%22100%25%22><stop offset=%220%25%22 style=%22stop-color:%23FF6B35;stop-opacity:1%22 /><stop offset=%22100%25%22 style=%22stop-color:%23D84315;stop-opacity:1%22 /></linearGradient></defs><rect width=%22320%22 height=%22180%22 fill=%22url(%23grad)%22/><circle cx=%22160%22 cy=%2290%22 r=%2245%22 fill=%22rgba(255,255,255,0.3)%22/><polygon points=%22150,70 150,110 180,90%22 fill=%22white%22/><text x=%22160%22 y=%22140%22 font-size=%2220%22 fill=%22white%22 text-anchor=%22middle%22 font-weight=%22bold%22>PILIHAN EDITOR</text></svg>') center/cover; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center;">
+        <div style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.6) 100%);"></div>
       </div>
       <div class="video-info">
         <div class="video-title">Video Pilihan & Unggulan</div>
-        <div class="video-date">Lihat di YouTube ↗</div>
+        <div class="video-date">Lihat video featured ↗</div>
       </div>
     </a>
 
+    <!-- Live Streams -->
     <a href="https://www.youtube.com/@boysnocry/streams" target="_blank" class="video-card reveal reveal-delay-2" style="text-decoration: none; color: inherit;">
-      <div class="video-thumb-wrap" style="background: linear-gradient(135deg, #DD0000 0%, #AA0000 100%); display: flex; align-items: center; justify-content: center; color: white; font-size: 3rem;">
-        🔴
+      <div class="video-thumb-wrap" style="background: linear-gradient(135deg, #DD0000 0%, #AA0000 100%); display: flex; align-items: center; justify-content: center; color: white; font-size: 3rem; position: relative; overflow: hidden;">
+        <div style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.6) 100%);"></div>
+        <div style="text-align: center; z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 1rem;">
+          <div style="font-size: 3rem; animation: pulse 1.5s ease-in-out infinite;">🔴</div>
+          <div style="font-size: 1.2rem; font-weight: bold; text-transform: uppercase; letter-spacing: 1px;">Live Stream</div>
+        </div>
       </div>
       <div class="video-info">
-        <div class="video-title">Streaming & Live Content</div>
-        <div class="video-date">Lihat di YouTube ↗</div>
+        <div class="video-title">Live Streaming & Recording</div>
+        <div class="video-date">Lihat live stream ↗</div>
       </div>
     </a>
   </div>
