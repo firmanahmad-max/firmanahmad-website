@@ -82,16 +82,37 @@
     transition: var(--transition);
   }
   .nav-logo {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.8rem;
-    font-weight: 600;
-    color: var(--brown-dark);
+    display: flex;
+    align-items: center;
     text-decoration: none;
-    letter-spacing: 0.02em;
     transition: var(--transition);
+    height: 50px;
   }
-  .nav-logo:hover { color: var(--terracotta); }
-  .nav-logo span { color: var(--terracotta); font-style: italic; font-size: 2rem; }
+  .nav-logo img {
+    height: 100%;
+    width: auto;
+    object-fit: contain;
+    transition: var(--transition);
+    /* Logo has black background - blend with page background */
+    mix-blend-mode: screen;
+    filter: brightness(1.15) contrast(1.05) saturate(1.1);
+  }
+  /* Light mode adjustment */
+  body.light .nav-logo img {
+    mix-blend-mode: multiply;
+    filter: brightness(0.95) contrast(1.1);
+  }
+  .nav-logo:hover img {
+    transform: scale(1.05);
+    filter: brightness(1.25) contrast(1.1) saturate(1.2);
+  }
+  body.light .nav-logo:hover img {
+    filter: brightness(0.9) contrast(1.15);
+  }
+  /* Mobile responsive */
+  @media (max-width: 900px) {
+    .nav-logo { height: 40px; }
+  }
   .nav-links { display: flex; gap: 2.5rem; list-style: none; align-items: center; }
   .nav-links a {
     text-decoration: none;
@@ -732,12 +753,32 @@
     border-top: 1px solid var(--border);
   }
   .footer-logo {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.5rem; margin-bottom: 1rem;
-    color: var(--text-primary); text-decoration: none;
-    display: block;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+    text-decoration: none;
+    height: 60px;
   }
-  .footer-logo span { color: var(--terracotta); font-style: italic; }
+  .footer-logo img {
+    height: 100%;
+    width: auto;
+    object-fit: contain;
+    mix-blend-mode: screen;
+    filter: brightness(1.15) contrast(1.05) saturate(1.1);
+    transition: var(--transition);
+  }
+  body.light .footer-logo img {
+    mix-blend-mode: multiply;
+    filter: brightness(0.95) contrast(1.1);
+  }
+  .footer-logo:hover img {
+    transform: scale(1.05);
+    filter: brightness(1.25) contrast(1.1) saturate(1.2);
+  }
+  body.light .footer-logo:hover img {
+    filter: brightness(0.9) contrast(1.15);
+  }
   .footer-links {
     display: flex; gap: 2rem; justify-content: center;
     list-style: none; margin-bottom: 2rem;
@@ -835,7 +876,9 @@
 
 <!-- Navigation -->
 <nav id="navbar">
-  <a href="#home" class="nav-logo">Firman <span>Ahmad</span></a>
+  <a href="#home" class="nav-logo" aria-label="Firman Ahmad - Home">
+    <img src="logo-firman.png" alt="Firman Ahmad" />
+  </a>
   <ul class="nav-links">
     <li><a href="#about">Tentang</a></li>
     <li><a href="#projects">Proyek</a></li>
@@ -1402,7 +1445,9 @@
 
 <!-- Footer -->
 <footer>
-  <a href="#home" class="footer-logo">Firman <span>Ahmad</span></a>
+  <a href="#home" class="footer-logo" aria-label="Firman Ahmad - Back to top">
+    <img src="logo-firman.png" alt="Firman Ahmad" />
+  </a>
   <ul class="footer-links">
     <li><a href="#about">Tentang</a></li>
     <li><a href="#projects">Proyek</a></li>
