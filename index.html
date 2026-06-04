@@ -73,7 +73,7 @@
   /* Navigation */
   nav {
     position: fixed; top: 0; width: 100%;
-    padding: 0.5rem 4rem;
+    padding: 1rem 4rem;
     display: flex; justify-content: space-between; align-items: center;
     z-index: 100;
     backdrop-filter: blur(20px);
@@ -86,32 +86,21 @@
     align-items: center;
     text-decoration: none;
     transition: var(--transition);
-    height: 180px;
+    height: 90px;
   }
   .nav-logo img {
     height: 100%;
     width: auto;
     object-fit: contain;
     transition: var(--transition);
-    /* Logo has black background - blend with page background */
-    mix-blend-mode: screen;
-    filter: brightness(1.15) contrast(1.05) saturate(1.1);
-  }
-  /* Light mode adjustment */
-  body.light .nav-logo img {
-    mix-blend-mode: multiply;
-    filter: brightness(0.95) contrast(1.1);
   }
   .nav-logo:hover img {
     transform: scale(1.05);
-    filter: brightness(1.25) contrast(1.1) saturate(1.2);
-  }
-  body.light .nav-logo:hover img {
-    filter: brightness(0.9) contrast(1.15);
+    filter: brightness(1.15) saturate(1.15);
   }
   /* Mobile responsive */
   @media (max-width: 900px) {
-    .nav-logo { height: 120px; }
+    .nav-logo { height: 65px; }
   }
   .nav-links { display: flex; gap: 2.5rem; list-style: none; align-items: center; }
   .nav-links a {
@@ -148,7 +137,7 @@
   /* ─── HERO ─── */
   #home {
     display: flex; align-items: center;
-    padding: 13rem 4rem 4rem;
+    padding: 9rem 4rem 4rem;
     position: relative; overflow: hidden;
   }
   .hero-bg-circle {
@@ -758,26 +747,17 @@
     justify-content: center;
     margin-bottom: 1.5rem;
     text-decoration: none;
-    height: 200px;
+    height: 110px;
   }
   .footer-logo img {
     height: 100%;
     width: auto;
     object-fit: contain;
-    mix-blend-mode: screen;
-    filter: brightness(1.15) contrast(1.05) saturate(1.1);
     transition: var(--transition);
-  }
-  body.light .footer-logo img {
-    mix-blend-mode: multiply;
-    filter: brightness(0.95) contrast(1.1);
   }
   .footer-logo:hover img {
     transform: scale(1.05);
-    filter: brightness(1.25) contrast(1.1) saturate(1.2);
-  }
-  body.light .footer-logo:hover img {
-    filter: brightness(0.9) contrast(1.15);
+    filter: brightness(1.15) saturate(1.15);
   }
   .footer-links {
     display: flex; gap: 2rem; justify-content: center;
@@ -849,10 +829,10 @@
 
   /* ─── MOBILE ─── */
   @media (max-width: 900px) {
-    nav { padding: 0.5rem 1.5rem; }
+    nav { padding: 0.75rem 1.5rem; }
     .nav-links { gap: 1.2rem; }
     .nav-links li:not(:last-child):not(:nth-last-child(2)) { display: none; }
-    #home { flex-direction: column; padding: 10rem 1.5rem 3rem; gap: 3rem; }
+    #home { flex-direction: column; padding: 7.5rem 1.5rem 3rem; gap: 3rem; }
     .hero-image { justify-content: center; }
     .hero-photo-wrap { width: 280px; height: 340px; }
     .hero-photo-frame { width: 250px; height: 310px; }
