@@ -515,6 +515,120 @@
   .project-card:hover .arrow { transform: translate(3px, -3px); }
   .project-year { font-size: 0.75rem; color: var(--text-muted); }
 
+  /* ─── ARTA ECOSYSTEM ─── */
+  #arta {
+    padding: 8rem 4rem;
+    background: linear-gradient(180deg, var(--cream) 0%, #0a1410 50%, var(--cream) 100%);
+    position: relative;
+  }
+  body.light #arta {
+    background: linear-gradient(180deg, var(--cream) 0%, #e8f0ea 50%, var(--cream) 100%);
+  }
+  .arta-intro {
+    max-width: 760px; margin: 2.5rem auto 4rem; text-align: center;
+  }
+  .arta-intro p {
+    font-size: 1.05rem; line-height: 1.8; color: var(--text-secondary);
+    margin-bottom: 1.2rem;
+  }
+  .arta-collab {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    font-size: 0.85rem; color: var(--text-muted);
+    padding: 0.5rem 1.2rem; border: 1px solid var(--border);
+    border-radius: 100px; margin-top: 0.5rem;
+  }
+  .arta-collab a { color: var(--gold); text-decoration: none; }
+  .arta-collab a:hover { text-decoration: underline; }
+  .arta-products { display: flex; flex-direction: column; gap: 2.5rem; }
+  .arta-card {
+    display: grid; grid-template-columns: 1fr 1fr;
+    background: var(--warm-white);
+    border: 1px solid var(--border);
+    border-radius: 28px; overflow: hidden;
+    transition: var(--transition);
+  }
+  .arta-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 24px 60px rgba(0,0,0,0.35);
+    border-color: rgba(217, 187, 122, 0.3);
+  }
+  .arta-card.reverse { direction: rtl; }
+  .arta-card.reverse > * { direction: ltr; }
+  .arta-card-img {
+    overflow: hidden; position: relative; min-height: 340px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .arta-card-img img {
+    width: 100%; height: 100%; object-fit: cover;
+    transition: transform 0.6s ease;
+  }
+  .arta-card:hover .arta-card-img img { transform: scale(1.06); }
+  .arta-card-body {
+    padding: 2.5rem; display: flex; flex-direction: column; justify-content: center;
+  }
+  .arta-card-tag {
+    font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--terracotta); margin-bottom: 0.75rem; font-weight: 600;
+  }
+  .arta-card-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.9rem; color: var(--text-primary);
+    margin-bottom: 0.4rem; line-height: 1.1;
+  }
+  .arta-card-subtitle {
+    font-size: 0.95rem; color: var(--gold); font-style: italic;
+    margin-bottom: 1.2rem;
+  }
+  .arta-card-desc {
+    font-size: 0.95rem; line-height: 1.7; color: var(--text-secondary);
+    margin-bottom: 1.5rem;
+  }
+  .arta-features {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem 1.2rem;
+    list-style: none; margin-bottom: 1.5rem;
+  }
+  .arta-features li {
+    font-size: 0.85rem; color: var(--text-secondary);
+    padding-left: 1.3rem; position: relative;
+  }
+  .arta-features li::before {
+    content: '✦'; position: absolute; left: 0; color: var(--gold);
+    font-size: 0.75rem;
+  }
+  .arta-card-year {
+    font-size: 0.75rem; color: var(--text-muted);
+    display: inline-block; padding: 0.3rem 0.9rem;
+    border: 1px solid var(--border); border-radius: 100px;
+    align-self: flex-start;
+  }
+  .arta-vision {
+    max-width: 820px; margin: 5rem auto 0; text-align: center;
+    padding: 3rem 2rem;
+    background: linear-gradient(135deg, rgba(217,187,122,0.08), rgba(255,138,91,0.05));
+    border: 1px solid rgba(217,187,122,0.2); border-radius: 28px;
+  }
+  .arta-vision h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem; color: var(--text-primary); margin-bottom: 1rem;
+  }
+  .arta-vision p {
+    font-size: 0.98rem; line-height: 1.8; color: var(--text-secondary);
+    margin-bottom: 1.5rem;
+  }
+  .arta-vision-tags {
+    display: flex; flex-wrap: wrap; gap: 0.6rem; justify-content: center;
+    margin-bottom: 1.5rem;
+  }
+  .arta-vision-tags span {
+    font-size: 0.78rem; color: var(--text-secondary);
+    padding: 0.4rem 1rem; background: rgba(217,187,122,0.1);
+    border: 1px solid var(--border); border-radius: 100px;
+  }
+  .arta-tagline {
+    font-family: 'Playfair Display', serif; font-style: italic;
+    font-size: 1.1rem; color: var(--gold);
+  }
+
   /* ─── BLOG ─── */
   #blog { padding: 8rem 4rem; }
   .blog-layout {
@@ -856,6 +970,12 @@
     .hero-photo-frame { width: 250px; height: 310px; }
     #about { grid-template-columns: 1fr; padding: 5rem 1.5rem; gap: 3rem; }
     #projects, #blog, #videos, #contact { padding: 5rem 1.5rem; }
+    #arta { padding: 5rem 1.5rem; }
+    .arta-card { grid-template-columns: 1fr; }
+    .arta-card.reverse { direction: ltr; }
+    .arta-card-img { min-height: 220px; }
+    .arta-card-body { padding: 1.8rem; }
+    .arta-features { grid-template-columns: 1fr; }
     .blog-layout { grid-template-columns: 1fr; }
     .contact-wrap { grid-template-columns: 1fr; gap: 3rem; }
     .videos-grid { grid-template-columns: 1fr; }
@@ -880,6 +1000,7 @@
   <ul class="nav-links">
     <li><a href="#about">Tentang</a></li>
     <li><a href="#projects">Proyek</a></li>
+    <li><a href="#arta">Arta</a></li>
     <li><a href="#blog">Blog</a></li>
     <li><a href="#videos">Video</a></li>
     <li><a href="#pembicara">Pembicara</a></li>
@@ -1184,6 +1305,135 @@
   </div>
 </section>
 
+<!-- ─── ARTA ECOSYSTEM ─── -->
+<section id="arta">
+  <div class="section-header reveal">
+    <span class="section-label">✦ Arta Ecosystem</span>
+    <h2 class="section-title">Membangun solusi<br><em>digital berdampak</em></h2>
+  </div>
+
+  <div class="arta-intro reveal">
+    <p>Arta Ecosystem adalah inisiatif pengembangan produk digital yang lahir dari semangat inovasi Max Computer. Berawal dari pengalaman bertahun-tahun dalam industri komputer dan teknologi informasi, Arta hadir sebagai wadah menciptakan aplikasi, platform, dan solusi digital yang menjawab kebutuhan nyata masyarakat, bisnis, dan komunitas di era modern.</p>
+    <p>Fokus utama Arta adalah membangun produk yang sederhana digunakan, kuat secara teknologi, dan memberikan manfaat nyata — mencakup POS, ERP, CRM, Productivity Tools, AI Companion, hingga solusi berbasis Artificial Intelligence.</p>
+    <span class="arta-collab">🤝 Berkolaborasi dengan <a href="https://mshadianto.id" target="_blank">mshadianto.id</a></span>
+  </div>
+
+  <div class="arta-products">
+
+    <!-- ArtaPOS -->
+    <div class="arta-card reveal">
+      <div class="arta-card-img">
+        <img src="artapos.jpeg" alt="ArtaPOS Dashboard">
+      </div>
+      <div class="arta-card-body">
+        <div class="arta-card-tag">Computer Store Management</div>
+        <h3 class="arta-card-title">ArtaPOS</h3>
+        <div class="arta-card-subtitle">Platform Manajemen Toko Komputer</div>
+        <p class="arta-card-desc">Aplikasi manajemen toko komputer yang dirancang khusus untuk kebutuhan bisnis teknologi di Indonesia. Dibangun dengan pendekatan modern dan scalable, menghadirkan modul yang saling terintegrasi dalam satu platform.</p>
+        <ul class="arta-features">
+          <li>Point of Sale (POS)</li>
+          <li>Inventory & Stock</li>
+          <li>Pembelian & Supplier</li>
+          <li>Utang & Piutang</li>
+          <li>Manajemen Jasa Servis</li>
+          <li>Modul Rakit PC</li>
+          <li>Laporan & Analitik</li>
+          <li>Scan Barcode</li>
+          <li>Cetak Struk Bluetooth</li>
+          <li>Laporan via WhatsApp</li>
+          <li>Multi-Tenant</li>
+          <li>Responsive Multi-Device</li>
+        </ul>
+        <span class="arta-card-year">2026</span>
+      </div>
+    </div>
+
+    <!-- CGPU-MAX -->
+    <div class="arta-card reverse reveal">
+      <div class="arta-card-img">
+        <img src="cgpu-arta.png" alt="CGPU-MAX Platform">
+      </div>
+      <div class="arta-card-body">
+        <div class="arta-card-tag">CPU & GPU Intelligence</div>
+        <h3 class="arta-card-title">CGPU-MAX</h3>
+        <div class="arta-card-subtitle">Platform Referensi Hardware Komputer</div>
+        <p class="arta-card-desc">Platform referensi perangkat keras yang menyediakan database lengkap CPU dan GPU dari Intel, AMD, serta NVIDIA. Membantu pengguna, gamer, content creator, hingga teknisi mengambil keputusan hardware secara tepat dan berbasis data.</p>
+        <ul class="arta-features">
+          <li>Database CPU & GPU lengkap</li>
+          <li>Perbandingan side-by-side</li>
+          <li>Analisis performa mendalam</li>
+          <li>Kalkulator Bottleneck</li>
+          <li>Rekomendasi hardware optimal</li>
+          <li>Ranking Top 10 CPU & GPU</li>
+        </ul>
+        <span class="arta-card-year">2026</span>
+      </div>
+    </div>
+
+    <!-- GoodDay V3 -->
+    <div class="arta-card reveal">
+      <div class="arta-card-img">
+        <img src="goodday-arta.jpeg" alt="GoodDay V3 App">
+      </div>
+      <div class="arta-card-body">
+        <div class="arta-card-tag">Islamic Daily Self Affirmation</div>
+        <h3 class="arta-card-title">GoodDay V3</h3>
+        <div class="arta-card-subtitle">Afirmasi & Refleksi Diri Islami</div>
+        <p class="arta-card-desc">Aplikasi afirmasi dan refleksi diri berbasis nilai-nilai Islam yang dirancang untuk menemani perjalanan spiritual dan emosional penggunanya setiap hari. Menjadi fondasi awal pengembangan teknologi AI yang lebih humanis.</p>
+        <ul class="arta-features">
+          <li>Motivasi harian berbasis Al-Qur'an</li>
+          <li>Ayat relevan dengan kondisi</li>
+          <li>Refleksi diri lebih mendalam</li>
+          <li>Pengalaman spiritual personal</li>
+        </ul>
+        <span class="arta-card-year">2026</span>
+      </div>
+    </div>
+
+    <!-- HariBaik V4 -->
+    <div class="arta-card reverse reveal">
+      <div class="arta-card-img">
+        <img src="haribaik-splash.jpeg" alt="HariBaik V4 App">
+      </div>
+      <div class="arta-card-body">
+        <div class="arta-card-tag">Islamic AI Companion</div>
+        <h3 class="arta-card-title">HariBaik V4</h3>
+        <div class="arta-card-subtitle">Mulai harimu dengan kebaikan</div>
+        <p class="arta-card-desc">Evolusi besar dari GoodDay yang menghadirkan pengalaman pendamping digital berbasis kecerdasan buatan dengan pendekatan Islami. Bukan sekadar aplikasi, tetapi ruang pendampingan digital yang mendukung perjalanan hidup penggunanya.</p>
+        <ul class="arta-features">
+          <li>AI natural, hangat, kontekstual</li>
+          <li>Personalisasi preferensi</li>
+          <li>Tracking & refleksi diri</li>
+          <li>Aksesibilitas & kenyamanan</li>
+          <li>Komunitas & engagement</li>
+          <li>Ayat & Hadits pilihan</li>
+        </ul>
+        <a href="https://haribaik.firmanahmad.id" target="_blank" class="project-link" style="margin-bottom: 1rem;">
+          Kunjungi HariBaik <span class="arrow">↗</span>
+        </a>
+        <span class="arta-card-year">2026</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Vision -->
+  <div class="arta-vision reveal">
+    <h3>Visi Ke Depan</h3>
+    <p>Arta Ecosystem dibangun dengan keyakinan bahwa teknologi terbaik adalah teknologi yang mampu menyelesaikan masalah nyata dan memberikan manfaat jangka panjang.</p>
+    <div class="arta-vision-tags">
+      <span>Artificial Intelligence</span>
+      <span>Business Management</span>
+      <span>Productivity Tools</span>
+      <span>Digital Utilities</span>
+      <span>Education Technology</span>
+      <span>Personal Development</span>
+      <span>Intelligent Assistant</span>
+    </div>
+    <p class="arta-tagline">"Building technology with purpose. Creating solutions that matter."</p>
+  </div>
+</section>
+
 <!-- ─── BLOG ─── -->
 <section id="blog">
   <div class="section-header reveal">
@@ -1472,6 +1722,7 @@
   <ul class="footer-links">
     <li><a href="#about">Tentang</a></li>
     <li><a href="#projects">Proyek</a></li>
+    <li><a href="#arta">Arta</a></li>
     <li><a href="#blog">Blog</a></li>
     <li><a href="#videos">Video</a></li>
     <li><a href="#pembicara">Pembicara</a></li>
