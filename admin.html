@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Admin Dashboard — Firman Ahmad</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;1,600&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0F0F0F;--panel:#1A1A1A;--panel2:#222;--border:rgba(229,217,203,.12);
+  --text:#EBE5D9;--text2:#C4A882;--muted:#8A7965;
+  --accent:#FF8A5B;--gold:#D9BB7A;--green:#6FBF8B;--red:#E06C6C;--blue:#6C9CE0;
+}
+*{margin:0;padding:0;box-sizing:border-box;font-family:'DM Sans',sans-serif}
+body{background:var(--bg);color:var(--text);min-height:100vh}
+h1,h2,h3{font-family:'Playfair Display',serif}
+button{cursor:pointer;font-family:inherit}
+input,textarea,select{
+  width:100%;padding:.65rem .9rem;background:var(--panel2);border:1px solid var(--border);
+  border-radius:8px;color:var(--text);font-size:.9rem;font-family:inherit
+}
+input:focus,textarea:focus{outline:none;border-color:var(--accent)}
+textarea{resize:vertical;min-height:80px}
+label{display:block;font-size:.75rem;color:var(--muted);margin:.8rem 0 .3rem;text-transform:uppercase;letter-spacing:.05em}
+
+/* Login */
+#loginScreen{display:flex;align-items:center;justify-content:center;min-height:100vh;padding:2rem}
+.login-box{max-width:440px;width:100%;background:var(--panel);border:1px solid var(--border);border-radius:20px;padding:2.5rem}
+.login-box h1{font-size:1.6rem;margin-bottom:.3rem}
+.login-box .sub{color:var(--muted);font-size:.85rem;margin-bottom:1.5rem}
+.hint{font-size:.75rem;color:var(--muted);margin-top:.4rem;line-height:1.5}
+.hint a{color:var(--gold)}
+
+/* Layout */
+#app{display:none}
+.topbar{
+  position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;
+  padding:.8rem 1.5rem;background:rgba(15,15,15,.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)
+}
+.topbar h1{font-size:1.1rem}
+.topbar .status{font-size:.75rem;color:var(--muted)}
+.layout{display:flex;min-height:calc(100vh - 57px)}
+.sidebar{width:210px;flex-shrink:0;border-right:1px solid var(--border);padding:1.2rem .8rem;background:var(--panel)}
+.sidebar button{
+  display:block;width:100%;text-align:left;padding:.65rem .9rem;margin-bottom:.25rem;
+  background:none;border:none;border-radius:8px;color:var(--text2);font-size:.88rem
+}
+.sidebar button:hover{background:var(--panel2)}
+.sidebar button.active{background:var(--accent);color:#1a1008;font-weight:600}
+.main{flex:1;padding:1.8rem;max-width:900px}
+
+/* Cards & items */
+.item{
+  background:var(--panel);border:1px solid var(--border);border-radius:14px;
+  padding:1.2rem;margin-bottom:1rem
+}
+.item-head{display:flex;align-items:center;justify-content:space-between;gap:.8rem;cursor:pointer}
+.item-head .t{font-weight:600;font-size:.95rem}
+.item-head .meta{font-size:.75rem;color:var(--muted)}
+.item-body{display:none;margin-top:1rem;border-top:1px solid var(--border);padding-top:.5rem}
+.item.open .item-body{display:block}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:0 1rem}
+.row3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0 1rem}
+
+/* Buttons */
+.btn{padding:.6rem 1.2rem;border-radius:8px;border:1px solid var(--border);background:var(--panel2);color:var(--text);font-size:.85rem;transition:.2s}
+.btn:hover{border-color:var(--accent)}
+.btn-primary{background:var(--accent);color:#1a1008;border:none;font-weight:600}
+.btn-primary:hover{filter:brightness(1.1)}
+.btn-danger{color:var(--red);border-color:rgba(224,108,108,.3)}
+.btn-sm{padding:.35rem .7rem;font-size:.75rem}
+.btn-icon{padding:.35rem .55rem;font-size:.8rem}
+.actions{display:flex;gap:.5rem;margin-top:1rem;flex-wrap:wrap}
+.add-btn{
+  width:100%;padding:.9rem;border:2px dashed var(--border);background:none;border-radius:14px;
+  color:var(--muted);font-size:.9rem;margin-bottom:1rem
+}
+.add-btn:hover{border-color:var(--accent);color:var(--accent)}
+
+/* Save bar */
+.savebar{
+  position:fixed;bottom:0;left:0;right:0;z-index:60;display:flex;gap:.8rem;align-items:center;justify-content:flex-end;
+  padding:.9rem 1.5rem;background:rgba(15,15,15,.97);border-top:1px solid var(--border)
+}
+.savebar .msg{margin-right:auto;font-size:.82rem;color:var(--muted)}
+.savebar .msg.ok{color:var(--green)}
+.savebar .msg.err{color:var(--red)}
+.main{padding-bottom:6rem}
+
+/* Panel header */
+.panel-head{margin-bottom:1.4rem}
+.panel-head h2{font-size:1.5rem;margin-bottom:.3rem}
+.panel-head p{font-size:.85rem;color:var(--muted)}
+
+/* image preview */
+.img-prev{height:60px;border-radius:8px;border:1px solid var(--border);margin-top:.4rem;display:block}
+.upload-zone{
+  border:2px dashed var(--border);border-radius:12px;padding:1.2rem;text-align:center;
+  color:var(--muted);font-size:.85rem;margin-top:.5rem;cursor:pointer
+}
+.upload-zone:hover{border-color:var(--gold);color:var(--gold)}
+.spin{display:inline-block;width:14px;height:14px;border:2px solid rgba(255,255,255,.2);border-top-color:var(--accent);border-radius:50%;animation:spin .8s linear infinite;vertical-align:middle}
+@keyframes spin{to{transform:rotate(360deg)}}
+.pill{display:inline-block;padding:.2rem .6rem;background:var(--panel2);border-radius:100px;font-size:.7rem;color:var(--text2);margin:.15rem}
+@media(max-width:800px){
+  .layout{flex-direction:column}
+  .sidebar{width:100%;display:flex;overflow-x:auto;padding:.6rem}
+  .sidebar button{white-space:nowrap;width:auto}
+  .row,.row3{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- ═══ LOGIN ═══ -->
+<div id="loginScreen">
+  <div class="login-box">
+    <h1>⚙️ Admin Dashboard</h1>
+    <div class="sub">firmanahmad.id — Content Manager</div>
+    <label>GitHub Username / Owner</label>
+    <input id="ghOwner" placeholder="misal: firmanahmad-max">
+    <label>Nama Repository</label>
+    <input id="ghRepo" placeholder="misal: firmanahmad-max.github.io">
+    <label>Branch</label>
+    <input id="ghBranch" value="main">
+    <label>Personal Access Token (PAT)</label>
+    <input id="ghToken" type="password" placeholder="ghp_xxxxxxxxxxxx">
+    <div class="hint">
+      Buat token di <a href="https://github.com/settings/tokens/new" target="_blank">github.com/settings/tokens</a> →
+      centang scope <b>repo</b> → Generate. Token disimpan hanya di browser Anda (localStorage).
+    </div>
+    <div class="actions">
+      <button class="btn btn-primary" style="width:100%" onclick="login()">🔓 Masuk Dashboard</button>
+    </div>
+    <div id="loginMsg" class="hint" style="color:var(--red)"></div>
+  </div>
+</div>
+
+<!-- ═══ APP ═══ -->
+<div id="app">
+  <div class="topbar">
+    <h1>⚙️ Admin — firmanahmad.id</h1>
+    <div>
+      <span class="status" id="repoStatus"></span>
+      <button class="btn btn-sm" onclick="logout()" style="margin-left:1rem">Keluar</button>
+    </div>
+  </div>
+  <div class="layout">
+    <nav class="sidebar" id="sidebar"></nav>
+    <main class="main" id="main"></main>
+  </div>
+  <div class="savebar">
+    <span class="msg" id="saveMsg">Perubahan belum disimpan akan hilang jika halaman ditutup.</span>
+    <button class="btn" onclick="window.open(SITE_URL,'_blank')">👁 Lihat Situs</button>
+    <button class="btn btn-primary" id="saveBtn" onclick="saveAll()">💾 Simpan & Publish</button>
+  </div>
+</div>
+
+<script>
+/* ═══════════ STATE ═══════════ */
+let CFG = JSON.parse(localStorage.getItem('adminCfg') || '{}');
+let DATA = null;
+let SHA = null;
+let activeTab = 'about';
+const SITE_URL = location.origin.includes('github.io') || location.origin.includes('firmanahmad.id') ? location.origin : 'https://firmanahmad.id';
+
+const TABS = [
+  ['about','👤 Tentang'],
+  ['projects','🚀 Proyek'],
+  ['arta','🌐 Arta Ecosystem'],
+  ['blog','✍️ Blog'],
+  ['videos','🎬 Video'],
+  ['speakers','🎤 Pembicara'],
+  ['custom','➕ Section Baru'],
+  ['images','🖼 Upload Gambar']
+];
+
+/* ═══════════ GITHUB API ═══════════ */
+const api = (path, opts={}) => fetch(`https://api.github.com/repos/${CFG.owner}/${CFG.repo}/${path}`, {
+  ...opts,
+  headers: { 'Authorization': `token ${CFG.token}`, 'Accept': 'application/vnd.github.v3+json', ...(opts.headers||{}) }
+});
+
+async function ghGetFile(path){
+  const r = await api(`contents/${path}?ref=${CFG.branch}`);
+  if(!r.ok) throw new Error(`Gagal load ${path}: ${r.status}`);
+  return r.json();
+}
+async function ghPutFile(path, contentB64, message, sha){
+  const body = { message, content: contentB64, branch: CFG.branch };
+  if(sha) body.sha = sha;
+  const r = await api(`contents/${path}`, { method:'PUT', body: JSON.stringify(body) });
+  if(!r.ok){ const e = await r.json(); throw new Error(e.message || r.status); }
+  return r.json();
+}
+const utf8ToB64 = s => btoa(unescape(encodeURIComponent(s)));
+
+/* ═══════════ LOGIN ═══════════ */
+async function login(){
+  CFG = {
+    owner: document.getElementById('ghOwner').value.trim(),
+    repo: document.getElementById('ghRepo').value.trim(),
+    branch: document.getElementById('ghBranch').value.trim() || 'main',
+    token: document.getElementById('ghToken').value.trim()
+  };
+  const msg = document.getElementById('loginMsg');
+  msg.textContent = 'Menghubungkan...';
+  try{
+    const f = await ghGetFile('content.json');
+    SHA = f.sha;
+    DATA = JSON.parse(decodeURIComponent(escape(atob(f.content.replace(/\n/g,'')))));
+    localStorage.setItem('adminCfg', JSON.stringify(CFG));
+    initApp();
+  }catch(e){
+    msg.textContent = '❌ ' + e.message + ' — pastikan owner/repo/token benar & content.json sudah di-upload ke repo.';
+  }
+}
+function logout(){
+  localStorage.removeItem('adminCfg');
+  location.reload();
+}
+async function tryAutoLogin(){
+  if(CFG.token && CFG.owner && CFG.repo){
+    try{
+      const f = await ghGetFile('content.json');
+      SHA = f.sha;
+      DATA = JSON.parse(decodeURIComponent(escape(atob(f.content.replace(/\n/g,'')))));
+      initApp();
+      return;
+    }catch(e){ localStorage.removeItem('adminCfg'); }
+  }
+  ['ghOwner','ghRepo','ghBranch','ghToken'].forEach(id=>{
+    const key = {ghOwner:'owner',ghRepo:'repo',ghBranch:'branch',ghToken:'token'}[id];
+    if(CFG[key]) document.getElementById(id).value = CFG[key];
+  });
+}
+
+function initApp(){
+  document.getElementById('loginScreen').style.display='none';
+  document.getElementById('app').style.display='block';
+  document.getElementById('repoStatus').textContent = `${CFG.owner}/${CFG.repo} (${CFG.branch})`;
+  renderSidebar();
+  renderTab();
+}
+
+/* ═══════════ SIDEBAR & TABS ═══════════ */
+function renderSidebar(){
+  document.getElementById('sidebar').innerHTML = TABS.map(([id,label]) =>
+    `<button class="${activeTab===id?'active':''}" onclick="switchTab('${id}')">${label}</button>`
+  ).join('');
+}
+function switchTab(id){ activeTab = id; renderSidebar(); renderTab(); }
+function renderTab(){
+  const m = document.getElementById('main');
+  const fn = { about:renderAbout, projects:renderProjects, arta:renderArta, blog:renderBlog, videos:renderVideos, speakers:renderSpeakers, custom:renderCustom, images:renderImages }[activeTab];
+  m.innerHTML = ''; fn(m);
+}
+const esc = s => (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;');
+function toggleItem(el){ el.closest('.item').classList.toggle('open'); }
+
+/* ═══════════ TENTANG ═══════════ */
+function renderAbout(m){
+  const a = DATA.about;
+  m.innerHTML = `
+  <div class="panel-head"><h2>👤 Tentang</h2><p>Bio, keahlian, dan statistik di section Tentang.</p></div>
+  <div class="item open">
+    <label>Judul Section</label>
+    <input value="${esc(a.title)}" onchange="DATA.about.title=this.value">
+    <label>Bio</label>
+    <textarea rows="4" onchange="DATA.about.bio=this.value">${esc(a.bio)}</textarea>
+    <label>Keahlian (pisahkan dengan koma)</label>
+    <input value="${esc(a.skills.join(', '))}" onchange="DATA.about.skills=this.value.split(',').map(s=>s.trim()).filter(Boolean)">
+  </div>
+  <h3 style="margin:1.5rem 0 .8rem">📊 Statistik (4 kartu)</h3>
+  ${a.stats.map((s,i)=>`
+  <div class="item open">
+    <div class="row3">
+      <div><label>Angka</label><input value="${esc(s.number)}" onchange="DATA.about.stats[${i}].number=this.value"></div>
+      <div><label>Label</label><input value="${esc(s.label)}" onchange="DATA.about.stats[${i}].label=this.value"></div>
+      <div><label>Link (opsional)</label><input value="${esc(s.link)}" onchange="DATA.about.stats[${i}].link=this.value"></div>
+    </div>
+  </div>`).join('')}`;
+}
+
+/* ═══════════ PROYEK ═══════════ */
+function renderProjects(m){
+  m.innerHTML = `
+  <div class="panel-head"><h2>🚀 Proyek</h2><p>Kelola card di section "Proyek Pilihan". Urutan teratas = tampil pertama.</p></div>
+  <button class="add-btn" onclick="addProject()">＋ Tambah Proyek Baru</button>
+  <div id="plist"></div>`;
+  const list = document.getElementById('plist');
+  list.innerHTML = DATA.projects.map((p,i)=>`
+  <div class="item">
+    <div class="item-head" onclick="toggleItem(this)">
+      <div><div class="t">${esc(p.title)||'(tanpa judul)'}</div><div class="meta">${esc(p.year)} · ${p.tags.map(esc).join(' · ')}</div></div>
+      <div style="display:flex;gap:.3rem" onclick="event.stopPropagation()">
+        <button class="btn btn-icon" onclick="moveItem(DATA.projects,${i},-1)">↑</button>
+        <button class="btn btn-icon" onclick="moveItem(DATA.projects,${i},1)">↓</button>
+        <button class="btn btn-icon btn-danger" onclick="if(confirm('Hapus proyek ini?')){DATA.projects.splice(${i},1);renderTab()}">✕</button>
+      </div>
+    </div>
+    <div class="item-body">
+      <label>Judul</label><input value="${esc(p.title)}" onchange="DATA.projects[${i}].title=this.value">
+      <label>Deskripsi</label><textarea rows="3" onchange="DATA.projects[${i}].desc=this.value">${esc(p.desc)}</textarea>
+      <div class="row">
+        <div><label>Gambar (nama file di repo)</label><input value="${esc(p.image)}" onchange="DATA.projects[${i}].image=this.value"><img class="img-prev" src="${esc(p.image)}" onerror="this.style.display='none'"></div>
+        <div><label>Posisi crop gambar</label><input value="${esc(p.imagePosition)}" placeholder="center / center top / center 20%" onchange="DATA.projects[${i}].imagePosition=this.value">
+        <label>Gradient background (CSS)</label><input value="${esc(p.gradient)}" onchange="DATA.projects[${i}].gradient=this.value"></div>
+      </div>
+      <label>Tags (pisahkan koma)</label><input value="${esc(p.tags.join(', '))}" onchange="DATA.projects[${i}].tags=this.value.split(',').map(s=>s.trim()).filter(Boolean)">
+      <div class="row">
+        <div><label>Link</label><input value="${esc(p.link)}" onchange="DATA.projects[${i}].link=this.value"></div>
+        <div><label>Tahun</label><input value="${esc(p.year)}" onchange="DATA.projects[${i}].year=this.value"></div>
+      </div>
+    </div>
+  </div>`).join('');
+}
+function addProject(){
+  DATA.projects.unshift({title:'',desc:'',image:'',imagePosition:'center',gradient:'linear-gradient(135deg, #333 0%, #111 100%)',tags:[],link:'',year:new Date().getFullYear().toString()});
+  renderTab();
+  document.querySelector('#plist .item')?.classList.add('open');
+}
+
+/* ═══════════ ARTA ═══════════ */
+function renderArta(m){
+  const a = DATA.arta;
+  m.innerHTML = `
+  <div class="panel-head"><h2>🌐 Arta Ecosystem</h2><p>Intro, produk, dan visi section Arta.</p></div>
+  <div class="item open">
+    <label>Paragraf Intro 1</label><textarea rows="3" onchange="DATA.arta.intro1=this.value">${esc(a.intro1)}</textarea>
+    <label>Paragraf Intro 2</label><textarea rows="3" onchange="DATA.arta.intro2=this.value">${esc(a.intro2)}</textarea>
+    <div class="row"><div><label>Nama Kolaborator</label><input value="${esc(a.collabName)}" onchange="DATA.arta.collabName=this.value"></div>
+    <div><label>Link Kolaborator</label><input value="${esc(a.collabLink)}" onchange="DATA.arta.collabLink=this.value"></div></div>
+  </div>
+  <h3 style="margin:1.5rem 0 .8rem">Produk Arta</h3>
+  <button class="add-btn" onclick="addArtaProduct()">＋ Tambah Produk Baru</button>
+  <div id="alist">${a.products.map((p,i)=>`
+  <div class="item">
+    <div class="item-head" onclick="toggleItem(this)">
+      <div><div class="t">${esc(p.title)||'(tanpa judul)'}</div><div class="meta">${esc(p.tag)}</div></div>
+      <div style="display:flex;gap:.3rem" onclick="event.stopPropagation()">
+        <button class="btn btn-icon" onclick="moveItem(DATA.arta.products,${i},-1)">↑</button>
+        <button class="btn btn-icon" onclick="moveItem(DATA.arta.products,${i},1)">↓</button>
+        <button class="btn btn-icon btn-danger" onclick="if(confirm('Hapus produk ini?')){DATA.arta.products.splice(${i},1);renderTab()}">✕</button>
+      </div>
+    </div>
+    <div class="item-body">
+      <div class="row">
+        <div><label>Tag kecil (atas)</label><input value="${esc(p.tag)}" onchange="DATA.arta.products[${i}].tag=this.value"></div>
+        <div><label>Judul</label><input value="${esc(p.title)}" onchange="DATA.arta.products[${i}].title=this.value"></div>
+      </div>
+      <label>Subtitle</label><input value="${esc(p.subtitle)}" onchange="DATA.arta.products[${i}].subtitle=this.value">
+      <label>Deskripsi</label><textarea rows="3" onchange="DATA.arta.products[${i}].desc=this.value">${esc(p.desc)}</textarea>
+      <label>Fitur (satu per baris)</label><textarea rows="5" onchange="DATA.arta.products[${i}].features=this.value.split('\\n').map(s=>s.trim()).filter(Boolean)">${esc(p.features.join('\n'))}</textarea>
+      <div class="row">
+        <div><label>Gambar</label><input value="${esc(p.image)}" onchange="DATA.arta.products[${i}].image=this.value"><img class="img-prev" src="${esc(p.image)}" onerror="this.style.display='none'"></div>
+        <div><label>Posisi crop</label><input value="${esc(p.imagePosition)}" onchange="DATA.arta.products[${i}].imagePosition=this.value">
+        <label>Gradient bg (opsional)</label><input value="${esc(p.gradient)}" onchange="DATA.arta.products[${i}].gradient=this.value"></div>
+      </div>
+      <div class="row3">
+        <div><label>Link (opsional)</label><input value="${esc(p.link)}" onchange="DATA.arta.products[${i}].link=this.value"></div>
+        <div><label>Teks tombol link</label><input value="${esc(p.linkText)}" onchange="DATA.arta.products[${i}].linkText=this.value"></div>
+        <div><label>Tahun</label><input value="${esc(p.year)}" onchange="DATA.arta.products[${i}].year=this.value"></div>
+      </div>
+    </div>
+  </div>`).join('')}</div>
+  <h3 style="margin:1.5rem 0 .8rem">Visi</h3>
+  <div class="item open">
+    <label>Teks Visi</label><textarea rows="2" onchange="DATA.arta.visionText=this.value">${esc(a.visionText)}</textarea>
+    <label>Tags Visi (pisahkan koma)</label><input value="${esc(a.visionTags.join(', '))}" onchange="DATA.arta.visionTags=this.value.split(',').map(s=>s.trim()).filter(Boolean)">
+    <label>Tagline</label><input value="${esc(a.tagline)}" onchange="DATA.arta.tagline=this.value">
+  </div>`;
+}
+function addArtaProduct(){
+  DATA.arta.products.unshift({tag:'',title:'',subtitle:'',desc:'',image:'',imagePosition:'center',gradient:'',features:[],link:'',linkText:'',year:new Date().getFullYear().toString()});
+  renderTab();
+  document.querySelector('#alist .item')?.classList.add('open');
+}
+
+/* ═══════════ BLOG ═══════════ */
+function renderBlog(m){
+  const b = DATA.blog;
+  m.innerHTML = `
+  <div class="panel-head"><h2>✍️ Blog</h2><p>Artikel unggulan dan daftar tulisan.</p></div>
+  <h3 style="margin-bottom:.8rem">Artikel Unggulan</h3>
+  <div class="item open">
+    <label>Judul</label><input value="${esc(b.featured.title)}" onchange="DATA.blog.featured.title=this.value">
+    <div class="row">
+      <div><label>Gambar</label><input value="${esc(b.featured.image)}" onchange="DATA.blog.featured.image=this.value"><img class="img-prev" src="${esc(b.featured.image)}" onerror="this.style.display='none'"></div>
+      <div><label>Link</label><input value="${esc(b.featured.link)}" onchange="DATA.blog.featured.link=this.value">
+      <div class="row"><div><label>Kategori</label><input value="${esc(b.featured.category)}" onchange="DATA.blog.featured.category=this.value"></div>
+      <div><label>Tanggal</label><input value="${esc(b.featured.date)}" onchange="DATA.blog.featured.date=this.value"></div></div></div>
+    </div>
+  </div>
+  <h3 style="margin:1.5rem 0 .8rem">Daftar Tulisan</h3>
+  <button class="add-btn" onclick="DATA.blog.posts.unshift({title:'',link:'',category:'Refleksi',date:''});renderTab()">＋ Tambah Tulisan</button>
+  ${b.posts.map((p,i)=>`
+  <div class="item open">
+    <div class="row"><div><label>Judul</label><input value="${esc(p.title)}" onchange="DATA.blog.posts[${i}].title=this.value"></div>
+    <div><label>Link</label><input value="${esc(p.link)}" onchange="DATA.blog.posts[${i}].link=this.value"></div></div>
+    <div class="row3">
+      <div><label>Kategori</label><input value="${esc(p.category)}" onchange="DATA.blog.posts[${i}].category=this.value"></div>
+      <div><label>Tanggal</label><input value="${esc(p.date)}" onchange="DATA.blog.posts[${i}].date=this.value"></div>
+      <div><label>&nbsp;</label><div style="display:flex;gap:.3rem">
+        <button class="btn btn-icon" onclick="moveItem(DATA.blog.posts,${i},-1)">↑</button>
+        <button class="btn btn-icon" onclick="moveItem(DATA.blog.posts,${i},1)">↓</button>
+        <button class="btn btn-icon btn-danger" onclick="DATA.blog.posts.splice(${i},1);renderTab()">✕</button>
+      </div></div>
+    </div>
+  </div>`).join('')}
+  <div class="item open"><label>Link "Semua Tulisan"</label><input value="${esc(b.allPostsLink)}" onchange="DATA.blog.allPostsLink=this.value"></div>`;
+}
+
+/* ═══════════ VIDEO ═══════════ */
+function renderVideos(m){
+  const v = DATA.videos;
+  m.innerHTML = `
+  <div class="panel-head"><h2>🎬 Video</h2><p>Video terbaru diambil otomatis dari channel YouTube via RSS.</p></div>
+  <div class="item open">
+    <label>Link Channel YouTube</label><input value="${esc(v.channelLink)}" onchange="DATA.videos.channelLink=this.value">
+    <label>Channel ID (untuk RSS auto-fetch)</label><input value="${esc(v.channelId)}" onchange="DATA.videos.channelId=this.value">
+    <div class="hint">Channel ID bisa dilihat di halaman channel → About → Share → Copy channel ID.</div>
+  </div>`;
+}
+
+/* ═══════════ PEMBICARA ═══════════ */
+function renderSpeakers(m){
+  m.innerHTML = `
+  <div class="panel-head"><h2>🎤 Pembicara</h2><p>Riwayat pengalaman sebagai pembicara.</p></div>
+  <button class="add-btn" onclick="DATA.speakers.unshift({title:'',year:'',image:'',desc:''});renderTab()">＋ Tambah Event</button>
+  ${DATA.speakers.map((s,i)=>`
+  <div class="item open">
+    <label>Nama Event</label><input value="${esc(s.title)}" onchange="DATA.speakers[${i}].title=this.value">
+    <label>Deskripsi</label><textarea rows="2" onchange="DATA.speakers[${i}].desc=this.value">${esc(s.desc||'')}</textarea>
+    <div class="row3">
+      <div><label>Tahun</label><input value="${esc(s.year)}" onchange="DATA.speakers[${i}].year=this.value"></div>
+      <div><label>Foto</label><input value="${esc(s.image)}" onchange="DATA.speakers[${i}].image=this.value"></div>
+      <div><label>&nbsp;</label><div style="display:flex;gap:.3rem">
+        <button class="btn btn-icon" onclick="moveItem(DATA.speakers,${i},-1)">↑</button>
+        <button class="btn btn-icon" onclick="moveItem(DATA.speakers,${i},1)">↓</button>
+        <button class="btn btn-icon btn-danger" onclick="DATA.speakers.splice(${i},1);renderTab()">✕</button>
+      </div></div>
+    </div>
+    <img class="img-prev" src="${esc(s.image)}" onerror="this.style.display='none'">
+  </div>`).join('')}`;
+}
+
+/* ═══════════ SECTION BARU (CUSTOM) ═══════════ */
+function renderCustom(m){
+  if(!DATA.customSections) DATA.customSections = [];
+  m.innerHTML = `
+  <div class="panel-head"><h2>➕ Section Baru</h2><p>Buat section/halaman baru. Otomatis muncul di navbar & sebelum section Kontak.</p></div>
+  <button class="add-btn" onclick="DATA.customSections.push({id:'section-'+Date.now(),navLabel:'Baru',label:'✦ Section Baru',title:'Judul<br><em>section</em>',content:'',cards:[]});renderTab()">＋ Buat Section Baru</button>
+  ${DATA.customSections.map((c,i)=>`
+  <div class="item">
+    <div class="item-head" onclick="toggleItem(this)">
+      <div><div class="t">${esc(c.navLabel)||'(section)'}</div><div class="meta">id: ${esc(c.id)}</div></div>
+      <div style="display:flex;gap:.3rem" onclick="event.stopPropagation()">
+        <button class="btn btn-icon" onclick="moveItem(DATA.customSections,${i},-1)">↑</button>
+        <button class="btn btn-icon" onclick="moveItem(DATA.customSections,${i},1)">↓</button>
+        <button class="btn btn-icon btn-danger" onclick="if(confirm('Hapus section ini?')){DATA.customSections.splice(${i},1);renderTab()}">✕</button>
+      </div>
+    </div>
+    <div class="item-body">
+      <div class="row3">
+        <div><label>Label di Navbar</label><input value="${esc(c.navLabel)}" onchange="DATA.customSections[${i}].navLabel=this.value"></div>
+        <div><label>ID (huruf kecil, tanpa spasi)</label><input value="${esc(c.id)}" onchange="DATA.customSections[${i}].id=this.value.toLowerCase().replace(/[^a-z0-9-]/g,'-')"></div>
+        <div><label>Label kecil section</label><input value="${esc(c.label)}" onchange="DATA.customSections[${i}].label=this.value"></div>
+      </div>
+      <label>Judul (boleh pakai &lt;br&gt; dan &lt;em&gt;)</label><input value="${esc(c.title)}" onchange="DATA.customSections[${i}].title=this.value">
+      <label>Konten teks/HTML (opsional)</label>
+      <textarea rows="5" onchange="DATA.customSections[${i}].content=this.value">${esc(c.content)}</textarea>
+      <div class="hint">Boleh HTML: &lt;p&gt;, &lt;b&gt;, &lt;a href&gt;, &lt;img src&gt;, dll.</div>
+      <label>Cards (opsional — seperti card proyek)</label>
+      <button class="btn btn-sm" onclick="DATA.customSections[${i}].cards.push({title:'',desc:'',image:'',link:'',year:''});renderTab()">＋ Tambah Card</button>
+      ${(c.cards||[]).map((cd,j)=>`
+      <div style="border:1px solid var(--border);border-radius:10px;padding:.8rem;margin-top:.6rem">
+        <div class="row"><div><label>Judul Card</label><input value="${esc(cd.title)}" onchange="DATA.customSections[${i}].cards[${j}].title=this.value"></div>
+        <div><label>Gambar</label><input value="${esc(cd.image)}" onchange="DATA.customSections[${i}].cards[${j}].image=this.value"></div></div>
+        <label>Deskripsi</label><textarea rows="2" onchange="DATA.customSections[${i}].cards[${j}].desc=this.value">${esc(cd.desc)}</textarea>
+        <div class="row3">
+          <div><label>Link</label><input value="${esc(cd.link)}" onchange="DATA.customSections[${i}].cards[${j}].link=this.value"></div>
+          <div><label>Tahun/label</label><input value="${esc(cd.year)}" onchange="DATA.customSections[${i}].cards[${j}].year=this.value"></div>
+          <div><label>&nbsp;</label><button class="btn btn-icon btn-danger" onclick="DATA.customSections[${i}].cards.splice(${j},1);renderTab()">✕ Hapus card</button></div>
+        </div>
+      </div>`).join('')}
+    </div>
+  </div>`).join('')}`;
+}
+
+/* ═══════════ UPLOAD GAMBAR ═══════════ */
+function renderImages(m){
+  m.innerHTML = `
+  <div class="panel-head"><h2>🖼 Upload Gambar</h2><p>Upload gambar langsung ke repository. Setelah upload, pakai nama filenya di field "Gambar" pada konten.</p></div>
+  <div class="item open">
+    <div class="upload-zone" onclick="document.getElementById('fileInput').click()">
+      📁 Klik untuk pilih gambar (jpg/png/webp, max ~5MB)
+    </div>
+    <input type="file" id="fileInput" accept="image/*" style="display:none" onchange="uploadImage(this)">
+    <div id="uploadResult" style="margin-top:1rem"></div>
+  </div>
+  <div class="hint" style="margin-top:1rem">💡 Tips: beri nama file huruf kecil tanpa spasi, misal: <b>proyek-baru.jpg</b></div>`;
+}
+async function uploadImage(input){
+  const file = input.files[0];
+  if(!file) return;
+  const res = document.getElementById('uploadResult');
+  const name = file.name.toLowerCase().replace(/\s+/g,'-');
+  res.innerHTML = `<span class="spin"></span> Mengupload ${name}...`;
+  try{
+    const b64 = await new Promise((ok,err)=>{
+      const r = new FileReader();
+      r.onload = ()=>ok(r.result.split(',')[1]);
+      r.onerror = err;
+      r.readAsDataURL(file);
+    });
+    let sha;
+    try{ const ex = await ghGetFile(name); sha = ex.sha; }catch(e){}
+    await ghPutFile(name, b64, `Upload image: ${name}`, sha);
+    res.innerHTML = `✅ Berhasil! Nama file: <b style="color:var(--green)">${name}</b><br><img class="img-prev" src="https://raw.githubusercontent.com/${CFG.owner}/${CFG.repo}/${CFG.branch}/${name}" style="height:100px;margin-top:.5rem">`;
+  }catch(e){
+    res.innerHTML = `<span style="color:var(--red)">❌ Gagal: ${e.message}</span>`;
+  }
+}
+
+/* ═══════════ UTILS ═══════════ */
+function moveItem(arr,i,dir){
+  const j = i + dir;
+  if(j<0 || j>=arr.length) return;
+  [arr[i],arr[j]] = [arr[j],arr[i]];
+  renderTab();
+}
+
+/* ═══════════ SAVE ═══════════ */
+async function saveAll(){
+  const btn = document.getElementById('saveBtn');
+  const msg = document.getElementById('saveMsg');
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spin"></span> Menyimpan...';
+  msg.className = 'msg';
+  msg.textContent = 'Commit ke GitHub...';
+  try{
+    // refresh SHA in case file changed
+    try{ const f = await ghGetFile('content.json'); SHA = f.sha; }catch(e){}
+    const json = JSON.stringify(DATA, null, 2);
+    const r = await ghPutFile('content.json', utf8ToB64(json), '📝 Update konten via Admin Dashboard', SHA);
+    SHA = r.content.sha;
+    msg.className = 'msg ok';
+    msg.textContent = '✅ Tersimpan & terpublish! Situs update dalam ~1 menit (hard refresh: Ctrl+Shift+R).';
+  }catch(e){
+    msg.className = 'msg err';
+    msg.textContent = '❌ Gagal simpan: ' + e.message;
+  }
+  btn.disabled = false;
+  btn.innerHTML = '💾 Simpan & Publish';
+}
+
+tryAutoLogin();
+</script>
+</body>
+</html>

@@ -2137,5 +2137,198 @@ function showFallbackVideos() {
   });
 }
 </script>
+<script>
+/* ═══════════ CMS HYDRATION — render konten dari content.json ═══════════ */
+(async function hydrateFromCMS(){
+  let D;
+  try{
+    const r = await fetch('content.json?t=' + Date.now());
+    if(!r.ok) return; // fallback: pakai HTML statis
+    D = await r.json();
+  }catch(e){ return; } // offline/local: pakai HTML statis
+
+  const esc = s => (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+
+  /* ── TENTANG ── */
+  try{
+    const a = D.about;
+    const aboutSec = document.querySelector('#about');
+    if(aboutSec && a){
+      const h3 = aboutSec.querySelector('.about-title, h3');
+      if(h3 && a.title) h3.textContent = a.title;
+      const skillsWrap = aboutSec.querySelector('.about-skills');
+      if(skillsWrap && a.skills && a.skills.length) skillsWrap.innerHTML = a.skills.map(s=>`<span class="skill-chip">${esc(s)}</span>`).join('');
+      const statCards = aboutSec.querySelectorAll('.stat-card');
+      if(statCards.length && a.stats){
+        a.stats.forEach((s,i)=>{
+          if(!statCards[i]) return;
+          const num = statCards[i].querySelector('.stat-number');
+          const lbl = statCards[i].querySelector('.stat-label');
+          if(num) num.textContent = s.number;
+          if(lbl) lbl.textContent = s.label;
+          if(s.link && statCards[i].tagName==='A') statCards[i].href = s.link;
+        });
+      }
+    }
+  }catch(e){ console.warn('about hydrate:', e); }
+
+  /* ── PROYEK ── */
+  try{
+    const grid = document.querySelector('#projects .projects-grid');
+    if(grid && D.projects && D.projects.length){
+      grid.innerHTML = D.projects.map((p,i)=>`
+      <div class="project-card reveal ${i%3===1?'reveal-delay-1':i%3===2?'reveal-delay-2':''}">
+        <div class="project-thumb">
+          <div class="project-thumb-bg" style="background: ${p.gradient||'var(--warm-white)'}; display:flex; align-items:center; justify-content:center; overflow:hidden;">
+            ${p.image?`<img src="${esc(p.image)}" alt="${esc(p.title)}" style="width:100%;height:100%;object-fit:cover;object-position:${esc(p.imagePosition||'center')};">`:''}
+          </div>
+        </div>
+        <div class="project-body">
+          <div class="project-tags">${(p.tags||[]).map(t=>`<span class="project-tag">${esc(t)}</span>`).join('')}</div>
+          <h3 class="project-title">${esc(p.title)}</h3>
+          <p class="project-desc">${esc(p.desc)}</p>
+          <div class="project-footer">
+            ${p.link?`<a href="${esc(p.link)}" ${p.link.startsWith('#')?'':'target="_blank"'} class="project-link">Lihat Proyek <span class="arrow">↗</span></a>`:'<span></span>'}
+            <span class="project-year">${esc(p.year)}</span>
+          </div>
+        </div>
+      </div>`).join('');
+    }
+  }catch(e){ console.warn('projects hydrate:', e); }
+
+  /* ── ARTA ── */
+  try{
+    const A = D.arta;
+    const intro = document.querySelector('#arta .arta-intro');
+    if(intro && A){
+      intro.innerHTML = `<p>${esc(A.intro1)}</p><p>${esc(A.intro2)}</p>
+      <span class="arta-collab">🤝 ${esc(A.collabText||'Berkolaborasi dengan')} <a href="${esc(A.collabLink)}" target="_blank">${esc(A.collabName)}</a></span>`;
+    }
+    const prods = document.querySelector('#arta .arta-products');
+    if(prods && A && A.products && A.products.length){
+      prods.innerHTML = A.products.map((p,i)=>`
+      <div class="arta-card ${i%2===1?'reverse ':''}reveal">
+        <div class="arta-card-img"${p.gradient?` style="background:${p.gradient};"`:''}>
+          ${p.image?`<img src="${esc(p.image)}" alt="${esc(p.title)}" style="object-position:${esc(p.imagePosition||'center')};">`:''}
+        </div>
+        <div class="arta-card-body">
+          <div class="arta-card-tag">${esc(p.tag)}</div>
+          <h3 class="arta-card-title">${esc(p.title)}</h3>
+          <div class="arta-card-subtitle">${esc(p.subtitle)}</div>
+          <p class="arta-card-desc">${esc(p.desc)}</p>
+          <ul class="arta-features">${(p.features||[]).map(f=>`<li>${esc(f)}</li>`).join('')}</ul>
+          ${p.link?`<a href="${esc(p.link)}" target="_blank" class="project-link" style="margin-bottom:1rem;">${esc(p.linkText||'Kunjungi')} <span class="arrow">↗</span></a>`:''}
+          <span class="arta-card-year">${esc(p.year)}</span>
+        </div>
+      </div>`).join('');
+    }
+    const vision = document.querySelector('#arta .arta-vision');
+    if(vision && A){
+      vision.innerHTML = `<h3>${esc(A.visionTitle||'Visi Ke Depan')}</h3><p>${esc(A.visionText)}</p>
+      <div class="arta-vision-tags">${(A.visionTags||[]).map(t=>`<span>${esc(t)}</span>`).join('')}</div>
+      <p class="arta-tagline">${esc(A.tagline)}</p>`;
+    }
+  }catch(e){ console.warn('arta hydrate:', e); }
+
+  /* ── BLOG ── */
+  try{
+    const B = D.blog;
+    if(B){
+      const feat = document.querySelector('.blog-featured');
+      if(feat && B.featured){
+        const img = feat.querySelector('img');
+        if(img) { img.src = B.featured.image; img.alt = B.featured.title; }
+        const title = feat.querySelector('.blog-featured-title, h3');
+        if(title) title.textContent = B.featured.title;
+        if(feat.tagName==='A'){ feat.href = B.featured.link; }
+        else { const link = feat.querySelector('a[href]'); if(link) link.href = B.featured.link; }
+      }
+      const list = document.querySelector('.blog-list');
+      if(list && B.posts && B.posts.length){
+        list.innerHTML = B.posts.map(p=>`
+        <a href="${esc(p.link)}" target="_blank" class="blog-item">
+          <div>
+            <div class="blog-item-title">${esc(p.title)}</div>
+            <div class="blog-item-meta">${esc(p.category)} · ${esc(p.date)}</div>
+          </div>
+          <span class="arrow">↗</span>
+        </a>`).join('');
+      }
+    }
+  }catch(e){ console.warn('blog hydrate:', e); }
+
+  /* ── PEMBICARA ── */
+  try{
+    const grid = document.querySelector('.speakers-grid');
+    if(grid && D.speakers && D.speakers.length){
+      grid.innerHTML = D.speakers.map((s,i)=>`
+      <div class="speaker-card reveal ${i%3===1?'reveal-delay-1':i%3===2?'reveal-delay-2':''}">
+        <div class="speaker-image"><img src="${esc(s.image)}" alt="${esc(s.title)}" style="width:100%;height:100%;object-fit:cover;"></div>
+        <div class="speaker-content">
+          <h3 class="speaker-title">${esc(s.title)}</h3>
+          ${s.desc?`<p class="speaker-desc">${esc(s.desc)}</p>`:''}
+          <div class="speaker-footer"><span class="speaker-year">${esc(s.year)}</span></div>
+        </div>
+      </div>`).join('');
+    }
+  }catch(e){ console.warn('speakers hydrate:', e); }
+
+  /* ── CUSTOM SECTIONS ── */
+  try{
+    if(D.customSections && D.customSections.length){
+      const contact = document.querySelector('#contact');
+      const navUl = document.querySelector('nav .nav-links');
+      const footUl = document.querySelector('.footer-links');
+      D.customSections.forEach(c=>{
+        if(!c.id || document.getElementById(c.id)) return;
+        const sec = document.createElement('section');
+        sec.id = c.id;
+        sec.style.padding = '8rem 4rem';
+        sec.innerHTML = `
+        <div class="section-header reveal">
+          <span class="section-label">${esc(c.label)}</span>
+          <h2 class="section-title">${c.title||''}</h2>
+        </div>
+        ${c.content?`<div class="reveal" style="max-width:760px;margin:2rem auto;font-size:1.02rem;line-height:1.8;color:var(--text-secondary);">${c.content}</div>`:''}
+        ${(c.cards&&c.cards.length)?`<div class="projects-grid" style="margin-top:2.5rem;">${c.cards.map(cd=>`
+          <div class="project-card reveal">
+            ${cd.image?`<div class="project-thumb"><div class="project-thumb-bg" style="overflow:hidden;"><img src="${esc(cd.image)}" alt="${esc(cd.title)}" style="width:100%;height:100%;object-fit:cover;"></div></div>`:''}
+            <div class="project-body">
+              <h3 class="project-title">${esc(cd.title)}</h3>
+              <p class="project-desc">${esc(cd.desc)}</p>
+              <div class="project-footer">
+                ${cd.link?`<a href="${esc(cd.link)}" target="_blank" class="project-link">Lihat <span class="arrow">↗</span></a>`:'<span></span>'}
+                <span class="project-year">${esc(cd.year)}</span>
+              </div>
+            </div>
+          </div>`).join('')}</div>`:''}`;
+        if(contact) contact.parentNode.insertBefore(sec, contact);
+        if(navUl){
+          const li = document.createElement('li');
+          li.innerHTML = `<a href="#${esc(c.id)}">${esc(c.navLabel)}</a>`;
+          const ctaLi = navUl.querySelector('.nav-cta')?.closest('li');
+          navUl.insertBefore(li, ctaLi||null);
+        }
+        if(footUl){
+          const li = document.createElement('li');
+          li.innerHTML = `<a href="#${esc(c.id)}">${esc(c.navLabel)}</a>`;
+          const lastLi = footUl.querySelector('a[href="#contact"]')?.closest('li');
+          footUl.insertBefore(li, lastLi||null);
+        }
+      });
+    }
+  }catch(e){ console.warn('custom sections hydrate:', e); }
+
+  /* re-trigger reveal animations untuk elemen baru */
+  try{
+    document.querySelectorAll('.reveal:not(.visible)').forEach(el=>{
+      const obs = new IntersectionObserver(entries=>{
+        entries.forEach(en=>{ if(en.isIntersecting){ en.target.classList.add('visible'); obs.unobserve(en.target); } });
+      },{threshold:.1});
+      obs.observe(el);
+    });
+  }catch(e){}
+})();
+</script>
 </body>
 </html>

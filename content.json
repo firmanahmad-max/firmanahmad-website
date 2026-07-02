@@ -1,0 +1,237 @@
+{
+  "about": {
+    "title": "Seorang pedagang yang hidup di antara kode dan cerita",
+    "bio": "Assalamualaikum, saya Firman Ahmad - seorang pedagang dari Samarinda, Kalimantan Timur. Penikmat novel dan gemar menulis. Tak bisa lepas dari tegukan kopi di mana kadang saya menemukan ruang untuk refleksi dan intropeksi di dalamnya tentang banyak hal dalam keseharian.",
+    "skills": ["Pemikiran Kritis", "Content Creator", "Analisis Bisnis", "Sufisme", "Videografi", "Fotografi", "Filosofi", "Storytelling", "Refleksi Mendalam", "Web Development"],
+    "stats": [
+      { "number": "100+", "label": "Artikel", "link": "https://boysnocry.blogspot.com/" },
+      { "number": "1.8K+", "label": "YouTube", "link": "https://www.youtube.com/@boysnocry" },
+      { "number": "20+", "label": "Tahun", "link": "https://maxcomputer.id" },
+      { "number": "∞", "label": "Refleksi", "link": "" }
+    ]
+  },
+  "projects": [
+    {
+      "title": "ArtaFin",
+      "desc": "AI-Powered Personal Finance. Cerdas kelola harta dengan Arta. ArtaFin menyatukan pencatatan, investasi, dan kebijaksanaan finansial syariah dalam satu ruang yang tenang — ditenagai kecerdasan buatan yang memahami caramu mengelola uang, bukan sekadar mencatatnya.",
+      "image": "artafin-splash.jpg",
+      "imagePosition": "center 18%",
+      "gradient": "linear-gradient(135deg, #2d1b4e 0%, #0d0a1a 100%)",
+      "tags": ["AI Finance", "Syariah", "Personal Finance"],
+      "link": "https://artafin.firmanahmad.id",
+      "year": "2026"
+    },
+    {
+      "title": "Arta Assistant",
+      "desc": "Arta adalah asisten pribadi berbasis kecerdasan buatan (AI) yang dirancang untuk membantu kita mengelola aktivitas, agenda, pengingat, kebiasaan, dan produktivitas sehari-hari dengan cara yang lebih sederhana dan natural. Berbeda dengan aplikasi reminder konvensional yang mengharuskan pengguna mengisi berbagai form dan pengaturan, Arta mengusung pendekatan \"Voice-First Experience\", di mana kita cukup berbicara seperti kepada seorang asisten pribadi.",
+      "image": "arta-assistant-splash.png",
+      "imagePosition": "center 28%",
+      "gradient": "linear-gradient(135deg, #4a3a9e 0%, #2d2563 100%)",
+      "tags": ["AI Assistant", "Voice-First", "Productivity"],
+      "link": "https://artaingat.firmanahmad.id",
+      "year": "2026"
+    },
+    {
+      "title": "ArtaPOS",
+      "desc": "Platform Manajemen Toko Komputer. Aplikasi manajemen toko komputer yang dirancang khusus untuk kebutuhan bisnis teknologi di Indonesia. Dibangun dengan pendekatan modern dan scalable, menghadirkan modul yang saling terintegrasi dalam satu platform.",
+      "image": "artapos.jpeg",
+      "imagePosition": "center",
+      "gradient": "linear-gradient(135deg, #1e3a5f 0%, #0a1628 100%)",
+      "tags": ["POS System", "Store Management", "Multi-Tenant"],
+      "link": "#arta",
+      "year": "2026"
+    },
+    {
+      "title": "HariBaik V4",
+      "desc": "Mulai harimu dengan kebaikan. HariBaik adalah aplikasi motivasi harian islami yang menghadirkan ayat Al-Quran & Hadits pilihan, motivasi islami setiap hari, serta AI companion untuk berbincang dan merefleksikan keseharian. Dirancang untuk membantu diri menjadi pribadi yang lebih baik, kapan saja dan di mana saja.",
+      "image": "haribaik-splash.png",
+      "imagePosition": "center",
+      "gradient": "linear-gradient(135deg, #1e4030 0%, #0d2818 100%)",
+      "tags": ["Islamic App", "AI Companion", "PWA"],
+      "link": "https://haribaik.firmanahmad.id",
+      "year": "2026"
+    },
+    {
+      "title": "GoodDay App v3",
+      "desc": "Islamic Daily Self Affirmation. Aplikasi motivasi harian islami dengan tujuan mendapatkan ayat Al-Quran & Hadits beserta motivasi yang \"relate\" dengan kondisi pengguna. Dengannya diharapkan kita selalu mendapatkan affirmasi positif islami kapan saja dan di mana saja.",
+      "image": "goodday-v3.jpeg",
+      "imagePosition": "center",
+      "gradient": "linear-gradient(135deg, #FF8A5B 0%, #D99D6C 100%)",
+      "tags": ["Islamic App", "Daily Motivation", "Web App"],
+      "link": "https://firmanahmad-max.github.io/goodday-app-V3/",
+      "year": "2026"
+    },
+    {
+      "title": "CGPU-MAX v3.5",
+      "desc": "Database spesifikasi CPU & GPU terlengkap. Bandingkan performa, hitung bottleneck, dan temukan hardware terbaik untuk kebutuhan Anda. Dilengkapi kalkulator bottleneck dan ranking Top 10.",
+      "image": "cgpu-max.png",
+      "imagePosition": "center",
+      "gradient": "linear-gradient(135deg, #7BA05B 0%, #5C8044 100%)",
+      "tags": ["Hardware Database", "Bottleneck Calculator", "Web App"],
+      "link": "https://app-bv1hxyu5gcg1.appmedo.com/login",
+      "year": "2026"
+    },
+    {
+      "title": "Max Computer Website",
+      "desc": "Website resmi Max Computer - toko komputer terpercaya di Samarinda sejak 2004. Melayani penjualan hardware, rakit PC, service, dan kebutuhan IT lainnya.",
+      "image": "maxcom-website.png",
+      "imagePosition": "center",
+      "gradient": "linear-gradient(135deg, #E8A854 0%, #D08830 100%)",
+      "tags": ["Corporate Website", "Professional", "Branding"],
+      "link": "https://maxcomputer.id/",
+      "year": "2026"
+    },
+    {
+      "title": "Analisis Teknikal Saham Buku 1",
+      "desc": "Buku panduan analisis teknikal saham menggunakan MetaStock. Membahas dasar-dasar chart reading, indikator teknikal, dan strategi trading untuk investor pemula hingga menengah.",
+      "image": "metastock-buku1.png",
+      "imagePosition": "center",
+      "gradient": "linear-gradient(135deg, #4A6FA5 0%, #2E4A73 100%)",
+      "tags": ["Buku", "Analisis Saham", "MetaStock"],
+      "link": "#",
+      "year": "2001"
+    },
+    {
+      "title": "Analisis Teknikal Saham Buku 2",
+      "desc": "Kelanjutan buku pertama dengan pembahasan lebih mendalam tentang strategi analisis teknikal tingkat lanjut, money management, dan psikologi trading.",
+      "image": "metastock-buku2.png",
+      "imagePosition": "center",
+      "gradient": "linear-gradient(135deg, #5B7DB1 0%, #3A5A8C 100%)",
+      "tags": ["Buku", "Analisis Saham", "Advanced"],
+      "link": "#",
+      "year": "2003"
+    },
+    {
+      "title": "Design Web FrontPage XP",
+      "desc": "Buku panduan lengkap membangun website menggunakan Microsoft FrontPage XP. Dari dasar HTML hingga publikasi website untuk pemula.",
+      "image": "buku-frontpage-xp.png",
+      "imagePosition": "center",
+      "gradient": "linear-gradient(135deg, #8B6FB5 0%, #5F4A85 100%)",
+      "tags": ["Buku", "Web Design", "Tutorial"],
+      "link": "#",
+      "year": "2002"
+    }
+  ],
+  "arta": {
+    "intro1": "Arta Ecosystem adalah inisiatif pengembangan produk digital yang lahir dari semangat inovasi Max Computer. Berawal dari pengalaman bertahun-tahun dalam industri komputer dan teknologi informasi, Arta hadir sebagai wadah menciptakan aplikasi, platform, dan solusi digital yang menjawab kebutuhan nyata masyarakat, bisnis, dan komunitas di era modern.",
+    "intro2": "Fokus utama Arta adalah membangun produk yang sederhana digunakan, kuat secara teknologi, dan memberikan manfaat nyata — mencakup POS, ERP, CRM, Productivity Tools, AI Companion, hingga solusi berbasis Artificial Intelligence.",
+    "collabText": "Berkolaborasi dengan",
+    "collabName": "mshadianto.id",
+    "collabLink": "https://mshadianto.id",
+    "products": [
+      {
+        "tag": "AI-Powered Personal Finance",
+        "title": "ArtaFin",
+        "subtitle": "Cerdas kelola harta dengan Arta",
+        "desc": "ArtaFin menyatukan pencatatan, investasi, dan kebijaksanaan finansial syariah dalam satu ruang yang tenang — ditenagai kecerdasan buatan yang memahami caramu mengelola uang, bukan sekadar mencatatnya.",
+        "image": "artafin-splash.jpg",
+        "imagePosition": "center top",
+        "gradient": "linear-gradient(135deg, #2d1b4e 0%, #0d0a1a 100%)",
+        "features": ["Pencatatan cerdas", "Tanya Arta — asisten AI", "Insight prediktif", "Aset & investasi", "Utang & piutang", "Keuangan syariah", "Pengelolaan & laporan", "Privasi & kenyamanan"],
+        "link": "https://artafin.firmanahmad.id",
+        "linkText": "Kunjungi ArtaFin",
+        "year": "2026"
+      },
+      {
+        "tag": "Indonesian Smart AI Assistant",
+        "title": "Arta Assistant",
+        "subtitle": "Bicara Sekali, Arta Ingat Selamanya",
+        "desc": "Arta adalah asisten pribadi berbasis kecerdasan buatan (AI) yang dirancang untuk membantu kita mengelola aktivitas, agenda, pengingat, kebiasaan, dan produktivitas sehari-hari dengan cara yang lebih sederhana dan natural — melalui pendekatan Voice-First Experience.",
+        "image": "arta-assistant-splash.png",
+        "imagePosition": "center",
+        "gradient": "linear-gradient(135deg, #4a3a9e 0%, #2d2563 100%)",
+        "features": ["🎤 Voice Reminder", "🤖 AI Personal Assistant", "📅 Smart Scheduling", "🔔 Intelligent Reminder", "📊 Productivity Insight", "📝 Smart Notes", "🎯 Habit Tracking", "🕌 Islamic Productivity", "💼 Business Follow-Up"],
+        "link": "https://artaingat.firmanahmad.id",
+        "linkText": "Kunjungi Arta",
+        "year": "2026"
+      },
+      {
+        "tag": "Computer Store Management",
+        "title": "ArtaPOS",
+        "subtitle": "Platform Manajemen Toko Komputer",
+        "desc": "Aplikasi manajemen toko komputer yang dirancang khusus untuk kebutuhan bisnis teknologi di Indonesia. Dibangun dengan pendekatan modern dan scalable, menghadirkan modul yang saling terintegrasi dalam satu platform.",
+        "image": "artapos.jpeg",
+        "imagePosition": "center",
+        "gradient": "",
+        "features": ["Point of Sale (POS)", "Inventory & Stock", "Pembelian & Supplier", "Utang & Piutang", "Manajemen Jasa Servis", "Modul Rakit PC", "Laporan & Analitik", "Scan Barcode", "Cetak Struk Bluetooth", "Laporan via WhatsApp", "Multi-Tenant", "Responsive Multi-Device"],
+        "link": "",
+        "linkText": "",
+        "year": "2026"
+      },
+      {
+        "tag": "CPU & GPU Intelligence",
+        "title": "CGPU-MAX",
+        "subtitle": "Platform Referensi Hardware Komputer",
+        "desc": "Platform referensi perangkat keras yang menyediakan database lengkap CPU dan GPU dari Intel, AMD, serta NVIDIA. Membantu pengguna, gamer, content creator, hingga teknisi mengambil keputusan hardware secara tepat dan berbasis data.",
+        "image": "cgpu-arta.png",
+        "imagePosition": "center",
+        "gradient": "",
+        "features": ["Database CPU & GPU lengkap", "Perbandingan side-by-side", "Analisis performa mendalam", "Kalkulator Bottleneck", "Rekomendasi hardware optimal", "Ranking Top 10 CPU & GPU"],
+        "link": "",
+        "linkText": "",
+        "year": "2026"
+      },
+      {
+        "tag": "Islamic Daily Self Affirmation",
+        "title": "GoodDay V3",
+        "subtitle": "Afirmasi & Refleksi Diri Islami",
+        "desc": "Aplikasi afirmasi dan refleksi diri berbasis nilai-nilai Islam yang dirancang untuk menemani perjalanan spiritual dan emosional penggunanya setiap hari. Menjadi fondasi awal pengembangan teknologi AI yang lebih humanis.",
+        "image": "goodday-arta.jpeg",
+        "imagePosition": "center",
+        "gradient": "",
+        "features": ["Motivasi harian berbasis Al-Qur'an", "Ayat relevan dengan kondisi", "Refleksi diri lebih mendalam", "Pengalaman spiritual personal"],
+        "link": "",
+        "linkText": "",
+        "year": "2026"
+      },
+      {
+        "tag": "Islamic AI Companion",
+        "title": "HariBaik V4",
+        "subtitle": "Mulai harimu dengan kebaikan",
+        "desc": "Evolusi besar dari GoodDay yang menghadirkan pengalaman pendamping digital berbasis kecerdasan buatan dengan pendekatan Islami. Bukan sekadar aplikasi, tetapi ruang pendampingan digital yang mendukung perjalanan hidup penggunanya.",
+        "image": "haribaik-splash.jpeg",
+        "imagePosition": "center",
+        "gradient": "",
+        "features": ["AI natural, hangat, kontekstual", "Personalisasi preferensi", "Tracking & refleksi diri", "Aksesibilitas & kenyamanan", "Komunitas & engagement", "Ayat & Hadits pilihan"],
+        "link": "https://haribaik.firmanahmad.id",
+        "linkText": "Kunjungi HariBaik",
+        "year": "2026"
+      }
+    ],
+    "visionTitle": "Visi Ke Depan",
+    "visionText": "Arta Ecosystem dibangun dengan keyakinan bahwa teknologi terbaik adalah teknologi yang mampu menyelesaikan masalah nyata dan memberikan manfaat jangka panjang.",
+    "visionTags": ["Artificial Intelligence", "Business Management", "Productivity Tools", "Digital Utilities", "Education Technology", "Personal Development", "Intelligent Assistant"],
+    "tagline": "\"Building technology with purpose. Creating solutions that matter.\""
+  },
+  "blog": {
+    "featured": {
+      "title": "Wisuda dan Kalimat Tak Terucap",
+      "image": "wisuda-lila.jpeg",
+      "link": "https://boysnocry.blogspot.com/2026/05/wisuda-dan-kalimat-tak-terucap.html",
+      "category": "Refleksi",
+      "date": "20 May 2026",
+      "readTime": "10 menit baca"
+    },
+    "posts": [
+      { "title": "Kolaborasi Jahat", "link": "https://boysnocry.blogspot.com/2024/02/kolaborasi-jahat.html", "category": "Refleksi", "date": "Feb 2024" },
+      { "title": "Berkemah", "link": "https://boysnocry.blogspot.com/2022/10/berkemah.html", "category": "Perjalanan", "date": "Oct 2022" },
+      { "title": "Kuman", "link": "https://boysnocry.blogspot.com/2022/03/kuman.html", "category": "Refleksi", "date": "Mar 2022" },
+      { "title": "KKN: Sebuah Kisah Klasik untuk Masa Depan", "link": "https://boysnocry.blogspot.com/2022/03/kkn-sebuah-kisah-klasik-untuk-masa-depan.html", "category": "Refleksi", "date": "Mar 2022" },
+      { "title": "Memanusiakan Manusia", "link": "https://boysnocry.blogspot.com/2016/06/memanusiakan-manusia.html", "category": "Refleksi", "date": "Jun 2016" }
+    ],
+    "allPostsLink": "https://boysnocry.blogspot.com/"
+  },
+  "videos": {
+    "channelLink": "https://www.youtube.com/@boysnocry",
+    "channelId": "UCvXBb55-NxB9N1mUjOafjRg"
+  },
+  "speakers": [
+    { "title": "Pekan IT Universitas Mulawarman", "year": "2017", "image": "pekan-it-unmul.jpg", "desc": "Berbagi insight dan pengalaman di acara Pekan IT, salah satu event teknologi terbesar di Universitas Mulawarman yang menghadirkan pembicara dan kompetisi IT berkelas nasional." },
+    { "title": "Upgrading & Raker Gama Diksi Universitas Mulawarman", "year": "2013", "image": "gama-diksi-upgrading.jpg", "desc": "Narasumber dalam kegiatan upgrading dan rapat kerja organisasi mahasiswa untuk meningkatkan kualitas SDM dan strategi pengembangan organisasi." },
+    { "title": "Seminar IT \"Go Green Computing Technology\" & \"Menjadi Mahasiswa Luar Biasa III\"", "year": "2013", "image": "gogreen-computing.jpg", "desc": "Pembicara di seminar nasional yang membahas teknologi ramah lingkungan dan motivasi pengembangan diri untuk mahasiswa berprestasi." },
+    { "title": "Seminar Motivasi FISIP - \"Menjadi Mahasiswa Luar Biasa II\"", "year": "2013", "image": "unmul-fisip.jpg", "desc": "Membagikan motivasi dan inspirasi kepada mahasiswa Jurusan Ilmu Komunikasi tentang mengembangkan potensi diri secara maksimal." },
+    { "title": "Seminar Motivasi STIMIK Widya Cipta Dharma - \"Menjadi Mahasiswa Luar Biasa\"", "year": "2012", "image": "wicida-hima.jpg", "desc": "Narasumber seminar motivasi dengan topik pengembangan diri dan achievement mahasiswa, membangkitkan semangat meraih prestasi." },
+    { "title": "Roadshow AMD-GIGABYTE Technology Update - Unmul & STIMIK Balikpapan", "year": "2010", "image": "amd-gigabyte-roadshow.jpg", "desc": "Pembicara dalam roadshow teknologi hardware terkemuka, memberikan informasi terbaru tentang inovasi hardware dan computing solutions." }
+  ],
+  "customSections": []
+}
