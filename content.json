@@ -201,6 +201,33 @@
     "collabLink": "https://mshadianto.id",
     "products": [
       {
+        "tag": "Ai-Powered Personal Library",
+        "title": "ArtaLib",
+        "subtitle": "Cerdas kelola koleksi buku dan pengetahuan",
+        "desc": "Smart Personal Library\nKelola koleksi buku, catatan dan kebiasaan membaca secara cerdas. Dilengkapi asisten AI, pencarian semantik dan pengenalan buku secara otomatis.",
+        "image": "splash-artalib.png",
+        "imagePosition": "center",
+        "gradient": "",
+        "features": [
+          "1. Smart Library",
+          "- Inventaris buku fisik dan digital.",
+          "- Input manual, scan ISBN, foto cover, dan OCR.",
+          "- Pencarian cepat, kategori, lokasi rak, serta sinkronisasi cloud.",
+          "2. Smart Reading",
+          "- Reading tracker.",
+          "- Reading goals dan streak.",
+          "- Catatan, highlight, kutipan, dan bookmark.",
+          "3. Smart Knowledge",
+          "- Ringkasan otomatis.",
+          "- Tanya jawab tentang isi buku.",
+          "- Mind map, flashcard, kuis, dan action plan.",
+          "- Pencarian semantik pada seluruh koleksi dan catatan."
+        ],
+        "link": "artalib.firmanahmad.id",
+        "linkText": "Kunjungi ArtaLib",
+        "year": "2026"
+      },
+      {
         "tag": "AI-Powered Personal Finance",
         "title": "ArtaFin",
         "subtitle": "Cerdas kelola harta dengan Arta",
