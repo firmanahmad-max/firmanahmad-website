@@ -30,8 +30,8 @@ jobs:
               xml = urllib.request.urlopen(req, timeout=30).read()
               root = ET.fromstring(xml)
           except Exception as e:
-              print(f"Gagal mengambil feed, videos.json lama dipertahankan: {e}")
-              sys.exit(0)
+              print(f"::error::Gagal mengambil feed YouTube: {e}")
+              sys.exit(1)
 
           videos = []
           for entry in root.findall("a:entry", NS)[:6]:
@@ -44,8 +44,8 @@ jobs:
                   })
 
           if not videos:
-              print("Feed kosong, videos.json lama dipertahankan.")
-              sys.exit(0)
+              print("::error::Feed YouTube kosong")
+              sys.exit(1)
 
           with open("videos.json", "w", encoding="utf-8") as f:
               json.dump({"updated": datetime.now(timezone.utc).isoformat(),
