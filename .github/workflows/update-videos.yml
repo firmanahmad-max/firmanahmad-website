@@ -1,0 +1,63 @@
+name: Update YouTube videos
+
+on:
+  schedule:
+    - cron: "0 */6 * * *"   # setiap 6 jam
+  workflow_dispatch:         # bisa dijalankan manual dari tab Actions
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Ambil video terbaru @boysnocry
+        run: |
+          python3 - << 'PY'
+          import json, sys, urllib.request, xml.etree.ElementTree as ET
+          from datetime import datetime, timezone
+
+          CHANNEL_ID = "UCvXBb55-NxB9N1mUjOafjRg"
+          URL = f"https://www.youtube.com/feeds/videos.xml?channel_id={CHANNEL_ID}"
+          NS = {"a": "http://www.w3.org/2005/Atom",
+                "yt": "http://www.youtube.com/xml/schemas/2015"}
+
+          try:
+              req = urllib.request.Request(URL, headers={"User-Agent": "Mozilla/5.0"})
+              xml = urllib.request.urlopen(req, timeout=30).read()
+              root = ET.fromstring(xml)
+          except Exception as e:
+              print(f"Gagal mengambil feed, videos.json lama dipertahankan: {e}")
+              sys.exit(0)
+
+          videos = []
+          for entry in root.findall("a:entry", NS)[:6]:
+              vid = entry.findtext("yt:videoId", namespaces=NS)
+              if vid:
+                  videos.append({
+                      "id": vid,
+                      "title": entry.findtext("a:title", default="", namespaces=NS),
+                      "published": entry.findtext("a:published", default="", namespaces=NS),
+                  })
+
+          if not videos:
+              print("Feed kosong, videos.json lama dipertahankan.")
+              sys.exit(0)
+
+          with open("videos.json", "w", encoding="utf-8") as f:
+              json.dump({"updated": datetime.now(timezone.utc).isoformat(),
+                         "videos": videos}, f, ensure_ascii=False, indent=2)
+          print(f"OK: {len(videos)} video ditulis")
+          PY
+
+      - name: Commit jika ada perubahan
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898283+github-actions[bot]@users.noreply.github.com"
+          git add videos.json 2>/dev/null || exit 0
+          git diff --cached --quiet && echo "Tidak ada perubahan" && exit 0
+          git commit -m "Update videos.json"
+          git push
