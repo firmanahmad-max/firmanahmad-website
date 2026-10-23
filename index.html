@@ -1653,60 +1653,69 @@
 
 <!-- ─── YOUTUBE / VIDEO ─── -->
 <section id="videos">
-  <div class="videos-intro reveal">
-    <div>
-      <span class="section-label">✦ Video</span>
-      <h2 class="section-title" style="text-align:left; font-size: clamp(1.8rem, 3vw, 2.5rem);">Dari channel<br><em>boysnocry</em></h2>
-    </div>
-    <a href="https://www.youtube.com/@boysnocry" target="_blank" class="yt-channel-badge">
-      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
-      Kunjungi Channel
-    </a>
-  </div>
-  <div class="videos-grid" id="videosGrid">
-    <!-- Dynamic Video Cards - Loaded via JavaScript -->
-    <a href="https://www.youtube.com/@boysnocry/videos" target="_blank" class="video-card reveal" id="videoCard1" style="text-decoration: none; color: inherit;">
-      <div class="video-thumb-wrap" id="videoThumb1" style="background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%); display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden;">
-        <div class="video-loading-spinner" style="display: flex; flex-direction: column; align-items: center; gap: 1rem; color: var(--text-secondary);">
-          <div style="width: 40px; height: 40px; border: 3px solid rgba(255,255,255,0.1); border-top-color: var(--terracotta); border-radius: 50%; animation: spin 1s linear infinite;"></div>
-          <div style="font-size: 0.85rem;">Memuat video...</div>
-        </div>
-      </div>
-      <div class="video-info">
-        <div class="video-title" id="videoTitle1">Video Terbaru dari Channel boysnocry</div>
-        <div class="video-date" id="videoDate1">Memuat... ↗</div>
-      </div>
-    </a>
+  name: Update YouTube videos
 
-    <a href="https://www.youtube.com/@boysnocry/videos" target="_blank" class="video-card reveal reveal-delay-1" id="videoCard2" style="text-decoration: none; color: inherit;">
-      <div class="video-thumb-wrap" id="videoThumb2" style="background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%); display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden;">
-        <div class="video-loading-spinner" style="display: flex; flex-direction: column; align-items: center; gap: 1rem; color: var(--text-secondary);">
-          <div style="width: 40px; height: 40px; border: 3px solid rgba(255,255,255,0.1); border-top-color: var(--amber); border-radius: 50%; animation: spin 1s linear infinite;"></div>
-          <div style="font-size: 0.85rem;">Memuat video...</div>
-        </div>
-      </div>
-      <div class="video-info">
-        <div class="video-title" id="videoTitle2">Video dari Channel boysnocry</div>
-        <div class="video-date" id="videoDate2">Memuat... ↗</div>
-      </div>
-    </a>
+on:
+  schedule:
+    - cron: "0 */6 * * *"   # setiap 6 jam
+  workflow_dispatch:         # bisa dijalankan manual dari tab Actions
 
-    <a href="https://www.youtube.com/@boysnocry/videos" target="_blank" class="video-card reveal reveal-delay-2" id="videoCard3" style="text-decoration: none; color: inherit;">
-      <div class="video-thumb-wrap" id="videoThumb3" style="background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%); display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden;">
-        <div class="video-loading-spinner" style="display: flex; flex-direction: column; align-items: center; gap: 1rem; color: var(--text-secondary);">
-          <div style="width: 40px; height: 40px; border: 3px solid rgba(255,255,255,0.1); border-top-color: var(--gold); border-radius: 50%; animation: spin 1s linear infinite;"></div>
-          <div style="font-size: 0.85rem;">Memuat video...</div>
-        </div>
-      </div>
-      <div class="video-info">
-        <div class="video-title" id="videoTitle3">Video dari Channel boysnocry</div>
-        <div class="video-date" id="videoDate3">Memuat... ↗</div>
-      </div>
-    </a>
-  </div>
-  <p style="text-align:center; margin-top: 2rem; padding: 1.5rem; background: rgba(255,68,68,0.1); border-radius: 10px; font-size: 0.9rem; color: var(--text-secondary);">
-    💡 Klik salah satu card di atas untuk melihat video terbaru, unggulan, dan live streaming dari channel @boysnocry. Semua konten otomatis update dari YouTube.
-  </p>
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Ambil video terbaru @boysnocry
+        run: |
+          python3 - << 'PY'
+          import json, sys, urllib.request, xml.etree.ElementTree as ET
+          from datetime import datetime, timezone
+
+          CHANNEL_ID = "UCvXBb55-NxB9N1mUjOafjRg"
+          URL = f"https://www.youtube.com/feeds/videos.xml?channel_id={CHANNEL_ID}"
+          NS = {"a": "http://www.w3.org/2005/Atom",
+                "yt": "http://www.youtube.com/xml/schemas/2015"}
+
+          try:
+              req = urllib.request.Request(URL, headers={"User-Agent": "Mozilla/5.0"})
+              xml = urllib.request.urlopen(req, timeout=30).read()
+              root = ET.fromstring(xml)
+          except Exception as e:
+              print(f"Gagal mengambil feed, videos.json lama dipertahankan: {e}")
+              sys.exit(0)
+
+          videos = []
+          for entry in root.findall("a:entry", NS)[:6]:
+              vid = entry.findtext("yt:videoId", namespaces=NS)
+              if vid:
+                  videos.append({
+                      "id": vid,
+                      "title": entry.findtext("a:title", default="", namespaces=NS),
+                      "published": entry.findtext("a:published", default="", namespaces=NS),
+                  })
+
+          if not videos:
+              print("Feed kosong, videos.json lama dipertahankan.")
+              sys.exit(0)
+
+          with open("videos.json", "w", encoding="utf-8") as f:
+              json.dump({"updated": datetime.now(timezone.utc).isoformat(),
+                         "videos": videos}, f, ensure_ascii=False, indent=2)
+          print(f"OK: {len(videos)} video ditulis")
+          PY
+
+      - name: Commit jika ada perubahan
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898283+github-actions[bot]@users.noreply.github.com"
+          git add videos.json 2>/dev/null || exit 0
+          git diff --cached --quiet && echo "Tidak ada perubahan" && exit 0
+          git commit -m "Update videos.json"
+          git push
 </section>
 
 <!-- ─── PEMBICARA ─── -->
